@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+    <link rel="stylesheet" type="text/css" href="./assets/css/styles.css">
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="./assets/js/main.js"></script>
+    <script type="text/javascript" src="./assets/js/config.js"></script>
+    <script type="text/javascript" src="./assets/js/getstarted.js"></script>
+    <script>
+        $(document).ready(function () {
+            StartPoint.Index.Init();
+        });
+    </script>
+</head>
+<body>
+	<header>
+		<h1>testing branching and pull requests</h1>
+	</header>
+	<main>
+		<div id="habit">
+            <h2>I would like to built the habit of...</h2>
+            <div id="habits">
+                <button class="habits" id="yoga" data-id="1">Yoga</button>
+                <button class="habits" id="gym" data-id="2">Gym</button>
+                <button class="habits" id="park" data-id="3">Park</button>
+                <button class="habits" id="a" data-id="4">a</button>
+                <button class="habits" id="b" data-id="5">b</button>
+                <button class="habits" id="c" data-id="6">c</button> 
+                <button class="habits" id="d" data-id="7">d</button> 
+                <button class="habits" id="e" data-id="8">e</button> 
+                <button class="habits" id="f" data-id="9">f</button>
+            </div>
+            <div>
+                <button id="btnNext">Next</button>
+            </div>
+        </div>
+
+        <div id="signup">
+            <input type="text" name="" placeholder="name" id="txtName">
+            <input type="email" name="" placeholder="email" id="txtEmail">
+            <input type="password" name="" placeholder="password" id="txtPassword">
+            <input type="password" name="" placeholder="confirm password" id="txtConfirmPassword">
+            
+            <select id="gender">
+                    <option>Select</option>
+                    <option value="female">Female</option>
+                    <option value="male">male</option>
+                    <option value="other">Other</option>
+                    </select> 
+            <select id="age">
+            </select> 
+            <button id="btnSignUp">Sign Up</button>    
+        </div>
+	</main>
+	<footer>
+		
+	</footer>
+</body>
+</html>
