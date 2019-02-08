@@ -19,7 +19,7 @@ var StartPoint = StartPoint || {};
         
         function initControls() {
             $("#habit").show();
-            $("#signup").hide();   
+            //$("#signup").hide();   
             
             $("#age").prepend("<option value=''>Select</option>").val('');
             $("#age").prop("selected", "selected")
@@ -68,7 +68,9 @@ var StartPoint = StartPoint || {};
 
                     firebase.auth().createUserWithEmailAndPassword(email, password)
                     .then(function(user) {
-                        updateUserInformation(name, email);
+                        console.log(user);
+
+                        updateUserInformation(name, email, user);
                     })
                     .catch(function(error) {
                         // Handle Errors here.
@@ -156,7 +158,7 @@ var StartPoint = StartPoint || {};
             return validData;
         }
 
-        function updateUserInformation(name, email){
+        function updateUserInformation(name, email, user){
 
 
 
