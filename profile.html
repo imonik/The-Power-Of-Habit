@@ -2,18 +2,28 @@
 <html>
 <head>
 	<title>Profile</title>
-	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 	<link rel="stylesheet" type="text/css" href="./assets/css/styles.css">
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script type="text/javascript" src="./assets/javascript/main.js"></script>
+    <script type="text/javascript" src="./assets/js/main.js"></script>
+    <script type="text/javascript" src="./assets/js/config.js"></script>
+    <script type="text/javascript" src="./assets/js/profile.js"></script>
+    <script>
+        $(document).ready(function () {
+            StartPoint.Index.Init();
+        });
+    </script>
 </head>
 <body>
 	<header>
 		
 	</header>
 	<main>
-		
+		<div>
+			<p id="name">algo</p><input type="text" placeholder="Mo,We, F"></div>
+		<button id="btnLogOut">Log Out</button>
+		<button id="btnUpdate">Save Changes</button>
 	</main>
 	<footer>
 		

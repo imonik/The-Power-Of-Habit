@@ -4,7 +4,7 @@ var StartPoint = StartPoint || {};
     var habitsArr= [];
     var emailRegex =  new RegExp("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
     var userData = {name : "", gender: "", age: 0, badges : [], habits : []};
-    
+    var days = [];
     var name = "";
     var email = "";
     var password = "";
@@ -74,10 +74,45 @@ var StartPoint = StartPoint || {};
                         // Handle Errors here.
                         var errorCode = error.code;
                         var errorMessage = error.message;
-                        showError(errorMessage);
+                        //showError(errorMessage);
                         console.log(errorMessage);
                         // ...
                     });
+                }
+            });
+            $("#btnLogIn").on("click", function(){
+                var email = $("#txtLogEmail").val();
+                var logPass = $("#txtLogPassword").val()
+
+                if(email != "" && logPass != ""){
+                    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+                    .then(function() {
+                    // Existing and future Auth states are now persisted in the current
+                    // session only. Closing the window would clear any existing state even
+                    // if a user forgets to sign out.
+                    // ...
+                    // New sign-in will be persisted with session persistence.
+                    //var promise = firebase.auth().signInWithEmailAndPassword(email, password);
+                    //promise.catch(e => console.log("message: " + e.message));
+                    firebase.auth().signInWithEmailAndPassword(email, logPass)
+                                    .then(function(user) {
+                                        console.log("user " +user);
+                                        window.location.href="profile.html"; 
+                                       
+                                    })
+                                    .catch(function(error) {
+                                        // Handle Errors here.
+                                        var errorCode = error.code;
+                                        var errorMessage = error.message;
+                                        console.log(errorMessage);
+                                        // ...
+                                    });
+                    })
+                .catch(function(error) {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                });
                 }
             });
         }
@@ -122,26 +157,58 @@ var StartPoint = StartPoint || {};
         }
 
         function updateUserInformation(name, email){
-            firebase.auth().onAuthStateChanged(function(user) {
-               name = name.charAt(0).toUpperCase() + name.slice(1);
-               user.updateProfile({
-                displayName: name
-              })
-            .then(function() {
-                firebase.database().ref('items/').child(user.uid).set(userData)
-                        .then((snap) => {
-                            console.log(snap)
-                            window.location.href="profile.html"; 
-                        }).catch(function(error) {
-                            // Handle Errors here.
-                            var errorCode = error.code;
-                            var errorMessage = error.message;
-                            showError(errorMessage);
-                            console.log(errorMessage);
-                            // ...
-                        });
-            });
-            });
+
+
+
+            firebase.database().ref('items/').child(user.uid).set(userData)
+                         .then((snap) => {
+                             console.log(snap)
+                             window.location.href="profile.html"; 
+                             $("name").text();
+                         }).catch(function(error) {
+                             // Handle Errors here.
+                             var errorCode = error.code;
+                             var errorMessage = error.message;
+                             //showError(errorMessage);
+                             console.log(errorMessage);
+                             // ...
+                         });
+
+        //     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+        //     .then(function() {
+        //     // Existing and future Auth states are now persisted in the current
+        //     // session only. Closing the window would clear any existing state even
+        //     // if a user forgets to sign out.
+        //     // ...
+        //     // New sign-in will be persisted with session persistence.
+        //     //var promise = firebase.auth().signInWithEmailAndPassword(email, password);
+        //     //promise.catch(e => console.log("message: " + e.message));
+        //     firebase.auth().onAuthStateChanged(function(user) {
+        //         name = name.charAt(0).toUpperCase() + name.slice(1);
+        //         user.updateProfile({
+        //          displayName: name
+        //        })
+        //      .then(function() {
+        //          firebase.database().ref('items/').child(user.uid).set(userData)
+        //                  .then((snap) => {
+        //                      console.log(snap)
+        //                      window.location.href="profile.html"; 
+        //                  }).catch(function(error) {
+        //                      // Handle Errors here.
+        //                      var errorCode = error.code;
+        //                      var errorMessage = error.message;
+        //                      //showError(errorMessage);
+        //                      console.log(errorMessage);
+        //                      // ...
+        //                  });
+        //      });
+        //      });
+        //     })
+        //   .catch(function(error) {
+        //     // Handle Errors here.
+        //     var errorCode = error.code;
+        //     var errorMessage = error.message;
+        //   });  
         }
 
       
