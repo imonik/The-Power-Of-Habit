@@ -70,7 +70,7 @@ var StartPoint = StartPoint || {};
                     .then(function(user) {
                         console.log(user);
 
-                        updateUserInformation(name, email, user);
+                        updateUserInformation(name, email);
                     })
                     .catch(function(error) {
                         // Handle Errors here.
@@ -158,11 +158,14 @@ var StartPoint = StartPoint || {};
             return validData;
         }
 
-        function updateUserInformation(name, email, user){
+        function updateUserInformation(name, email){
 
-
-
-            firebase.database().ref('items/').child(user.uid).set(userData)
+            firebase.auth().onAuthStateChanged(function(user) {
+                //         name = name.charAt(0).toUpperCase() + name.slice(1);
+                //         user.updateProfile({
+                //          displayName: name
+            }).then(function() {
+                firebase.database().ref('items/').child(user.uid).set(userData)
                          .then((snap) => {
                              console.log(snap)
                              window.location.href="profile.html"; 
@@ -174,7 +177,13 @@ var StartPoint = StartPoint || {};
                              //showError(errorMessage);
                              console.log(errorMessage);
                              // ...
-                         });
+                         })
+          .catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+          })
+        //});  
 
         //     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
         //     .then(function() {
