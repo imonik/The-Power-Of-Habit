@@ -15,6 +15,7 @@
     <link href="./assets/css/flag-icon.min.css" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="./assets/js/main.js"></script>
     <script type="text/javascript" src="./assets/js/config.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body class="layout-semi-dark loaded" cz-shortcut-listen="true">
@@ -23,63 +24,7 @@
     <!-- //////////////////////////////////////////////////////////////////////////// -->
     <!-- START HEADER -->
     <header id="header" class="page-topbar">
-        <!-- start header nav-->
-        <div class="navbar-fixed">
-            <nav class="navbar-color">
-                <div class="nav-wrapper">
-                    <div class="header-search-wrapper hide-on-med-and-down sideNav-lock">
-
-                        <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Where to next?">
-                    </div>
-
-
-                    <li>
-                        <a href="javascript:void(0);" class="waves-effect waves-block waves-light profile-button"
-                            data-activates="profile-dropdown">
-                            <span class="avatar-status avatar-online">
-                                <img src="../../images/avatar/avatar-7.png" alt="avatar">
-                                <i></i>
-                            </span>
-                        </a>
-                        <ul id="profile-dropdown" class="dropdown-content">
-                            <li>
-                                <a href="#" class="grey-text text-darken-1">
-
-                            </li>
-                            <li>
-                                <a href="#" class="grey-text text-darken-1">
-
-                            </li>
-                            <li>
-                                <a href="#" class="grey-text text-darken-1">
-
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#" class="grey-text text-darken-1">
-
-                            </li>
-                            <li>
-                                <a href="#" class="grey-text text-darken-1">
-
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" data-activates="chat-out" class="waves-effect waves-block waves-light chat-collapse">
-
-                        </a>
-                    </li>
-                    </ul>
-                    <!-- translation-button -->
-
-                    <!-- notifications-dropdown -->
-
-                    <!-- profile-dropdown -->
-
-                </div>
-            </nav>
-        </div>
+     
     </header>
     <!-- END HEADER -->
     <!-- //////////////////////////////////////////////////////////////////////////// -->
@@ -203,28 +148,42 @@
                         </div>
                         <!--card stats end-->
                         <!--yearly & weekly revenue chart start-->
+
+                        <!-----------------MAP DIV HERE-------------------->
                         <div id="sales-chart">
                             <div class="row">
-                                <div class="col s12 m8 l8">
+                                <div class="col s12 m12 l12">
                                     <div id="revenue-chart" class="card">
                                         <div class="card-content">
-                                            <h4 class="header mt-0">Location Map
-                                                <span class="purple-text small text-darken-1 ml-1">
-
-                                            </h4>
+                                            <div class="container text-center allLocations">
+                                                <h4 class="header mt-0">Find Habits :
+                                                    <button class="btn location" data-state="false" data-position=1
+                                                        data-name="gym fitness">Gym</button>
+                                                    <button class="btn location" data-state="false" data-position=2
+                                                        data-name="public park">Parks</button>
+                                                    <button class="btn location" data-state="false" data-position=3
+                                                        data-name="yoga">Yoga</button>
+                                                    <button class="btn location" data-state="false" data-position=4
+                                                        data-name="spin cycle class">Spin</button>
+                                                    <button class="btn location" data-state="false" data-position=5
+                                                        data-name="dance class">Dance</button>
+                                                    <button class="btn location" data-state="false" data-position=6
+                                                        data-name="rock climbing">Rock Climbing</button>
+                                                </h4>
+                                            </div><br>
+                                            <!-- <h2>Find Near You: <input type="text"><button class="btn btn-primary" id="newButt" onclick="addButt()">Add</button> <button class="btn btn-warning" id="selectHabit">Select Habit!</button></h2> -->
                                             <div class="row">
                                                 <div class="col s12">
                                                     <div class="yearly-revenue-chart">
-                                                        <canvas id="thisYearRevenue" class="firstShadow" height="700"
-                                                            width="1430" style="width: 715px; height: 350px;"></canvas><!-- MAP GOES HERE-->
-                                                        <canvas id="lastYearRevenue" height="700" width="1430" style="width: 715px; height: 350px;"></canvas>
+                                                        <!-- MAP HERE -->
+                                                        <div id="map" style="width:100%;height:90%;padding:100px;margin: auto;"></div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col s12 m4 l4">
+                                <!-- <div class="col s12 m4 l4">
                                     <div id="weekly-earning" class="card">
                                         <div class="card-content">
                                             <h4 class="header m-0">DAYS
@@ -242,7 +201,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -328,6 +287,13 @@
             </div>
         </footer>
     </main>
+    <script src="./assets/js/map.js"></script>
+
+    <script>
+        var scriptTag = $('<script>').attr('src', `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initialize`).attr('async', '').attr('defer', '');
+        $('body').append(scriptTag);
+    </script>
+  
 </body>
 
 </html>

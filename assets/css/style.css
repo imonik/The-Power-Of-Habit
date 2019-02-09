@@ -7327,6 +7327,10 @@ Cards
   top: 5px;
 }
 
+.location:hover{
+  cursor: pointer;
+}
+
 .chart-revenue-switch {
   padding-top: 28px;
   padding-right: 10px;
@@ -8467,9 +8471,9 @@ tr.group:hover {
   position: relative;
 }
 
-#revenue-chart .yearly-revenue-chart canvas {
+#revenue-chart .yearly-revenue-chart {
   width: 100% !important;
-  height: 350px !important;
+  height: 400px !important;
 }
 
 #revenue-chart .yearly-revenue-chart canvas.firstShadow {

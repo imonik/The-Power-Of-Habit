@@ -6,3 +6,5 @@ var config = {
     storageBucket: "fir-logintest-e0d0c.appspot.com",
     messagingSenderId: "25519651614"
 }
+
+var apiKey = "AIzaSyB6se6nsjD675HR8rjkJA82uEnElet-VYc"
