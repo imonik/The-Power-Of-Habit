@@ -160,7 +160,7 @@ var StartPoint = StartPoint || {};
         }
 
         function updateUserInformation(name, email) {
-            firebase.auth().onAuthStateChanged(function() {
+            firebase.auth().onAuthStateChanged(function(user) {
                 name = name.charAt(0).toUpperCase() + name.slice(1);
                 user.updateProfile({
                     displayName: name
