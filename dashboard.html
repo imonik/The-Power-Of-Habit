@@ -2,10 +2,13 @@
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Compiled and minified CSS Materialize-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Google font icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./assets/css/styles.css">
     <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link href="./assets/css/materialize.css" type="text/css" rel="stylesheet">
     <link href="./assets/css/style.css" type="text/css" rel="stylesheet">
@@ -16,25 +19,23 @@
     <script type="text/javascript" src="./assets/js/main.js"></script>
     <script type="text/javascript" src="./assets/js/config.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <style>
+        .collapsible-header, .collapsible-body {
+        color: #ffff;
+    }
+    </style>
 </head>
 
 <body class="layout-semi-dark loaded" cz-shortcut-listen="true">
-    <!-- Start Page Loading -->
 
-    <!-- //////////////////////////////////////////////////////////////////////////// -->
-    <!-- START HEADER -->
-    <header id="header" class="page-topbar">
-     
-    </header>
-    <!-- END HEADER -->
-    <!-- //////////////////////////////////////////////////////////////////////////// -->
-    <!-- START MAIN -->
     <main>
         <div id="main">
             <!-- START WRAPPER -->
             <div class="wrapper">
                 <!-- START LEFT SIDEBAR NAV-->
-                <aside id="left-sidebar-nav" class="nav-expanded nav-lock nav-collapsible">
+                <aside id="left-sidebar-nav" class="nav-lock nav-collapsible">
+
                     <div class="brand-sidebar">
                         <h1 class="logo-wrapper">
                             <a href="index.html" class="brand-logo darken-1">
@@ -42,39 +43,30 @@
                                 <!-- <img src="./assets/imgs/apple-touch-icon-152x152.png" alt="materialize logo"> -->
                                 <span class="logo-text hide-on-med-and-down">Habitual</span>
                             </a>
-                            <a href="#" class="navbar-toggler">
 
-                            </a>
                         </h1>
                     </div>
-                    <ul id="slide-out" class="side-nav fixed leftside-navigation ps-container ps-active-y" style="transform: translateX(0%);">
-                        <li class="no-padding">
-                            <ul class="collapsible" data-collapsible="accordion">
+
+                    <ul id="slide-out" class=" collapsible side-nav fixed leftside-navigation ps-container ps-active-y">
+                        <ul class="collapsible expandable">
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+                                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
+                                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+                                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                            </li>
+                        </ul>
 
 
-                                <li>
-                                    <a href="https://pixinvent.ticksy.com" target="_blank">
-
-                                        <span class="nav-text">Find Places Nearby</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://pixinvent.ticksy.com" target="_blank">
-
-                                        <span class="nav-text">Support</span>
-                                    </a>
-                                </li>
-                                <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 3px;">
-                                    <div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div>
-                                </div>
-                                <div class="ps-scrollbar-y-rail" style="top: 0px; height: 737px; right: 3px;">
-                                    <div class="ps-scrollbar-y" style="top: 0px; height: 461px;"></div>
-                                </div>
-                            </ul>
-                            <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only gradient-45deg-light-blue-cyan gradient-shadow">
-
-                            </a>
                 </aside>
+
+
                 <!-- END LEFT SIDEBAR NAV-->
                 <!-- //////////////////////////////////////////////////////////////////////////// -->
                 <!-- START CONTENT -->
@@ -94,7 +86,6 @@
                                             <div class="col s5 m5 right-align">
                                                 <h5 class="mb-0">690</h5>
                                                 <p class="no-margin">Streak</p>
-                                                <p>6,00,00</p>
                                             </div>
                                         </div>
                                     </div>
@@ -109,7 +100,6 @@
                                             <div class="col s5 m5 right-align">
                                                 <h5 class="mb-0">1885</h5>
                                                 <p class="no-margin">Miles</p>
-                                                <p>12,900</p>
                                             </div>
                                         </div>
                                     </div>
@@ -124,7 +114,7 @@
                                             <div class="col s5 m5 right-align">
                                                 <h5 class="mb-0">5 days</h5>
                                                 <p class="no-margin">Frequency</p>
-                                                <p>frequency</p>
+
                                             </div>
                                         </div>
                                     </div>
@@ -139,7 +129,7 @@
                                             <div class="col s5 m5 right-align">
                                                 <h5 class="mb-0">30</h5>
                                                 <p class="no-margin">Days Left</p>
-                                                <p>Way to go!</p>
+
                                             </div>
                                         </div>
                                     </div>
@@ -287,13 +277,22 @@
             </div>
         </footer>
     </main>
+
     <script src="./assets/js/map.js"></script>
 
     <script>
         var scriptTag = $('<script>').attr('src', `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initialize`).attr('async', '').attr('defer', '');
         $('body').append(scriptTag);
     </script>
-  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./assets/js/materialize.min.js"></script>
+    <script type="text/javascript">
+        var elem = document.querySelector('.collapsible.expandable');
+        var instance = M.Collapsible.init(elem, {
+            accordion: false
+        });
+
+    </script>
 </body>
 
 </html>
