@@ -20,6 +20,8 @@ var StartPoint = StartPoint || {};
         function initControls() {
             $("#habit").show();
             $("#signup").hide();   
+            $('.materialboxed').materialbox();
+			$('.modal').modal();
 
             $("#age").prepend("<option value=''>Select</option>").val('');
             $("#age").prop("selected", "selected")
@@ -97,7 +99,8 @@ var StartPoint = StartPoint || {};
                 }
             });
 
-            $("#btnLogIn").on("click", function () {
+            $("#aLogin").on("click", function () {
+                console.log("a click");
                 var email = $("#txtLogEmail").val();
                 var logPass = $("#txtLogPassword").val()
 
