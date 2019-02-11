@@ -21,11 +21,7 @@
 	<script type="text/javascript" src="./assets/js/home.js"></script>
 	<script type="text/javascript" src="./assets/js/getstarted.js"></script>
 
-	<script>
-        $(document).ready(function () {
-            StartPoint.Index.Init();
-        });
-    </script>
+	
 </head>
 <body>
 	<header>
@@ -63,7 +59,7 @@
 								</div>
 					
 								</form>
-								<a class="waves-effect waves-light btn-large" id="aLogin">Login</a><!-- Submit links to dashboard-->
+								<a class="waves-effect waves-light btn-large" id="homeLogin">Login</a><!-- Submit links to dashboard-->
 					
 							</div>
 							</div>
@@ -104,7 +100,11 @@
 	<footer>
 
 	</footer>
-
+	<script>
+		$(document).ready(function () {
+			StartPoint.Index.Init();
+		});
+	</script>
 	<script type="text/javascript">
 		// document.addEventListener('DOMContentLoaded', function () {
 		// 	var elems = document.querySelectorAll('.materialboxed');
