@@ -66,21 +66,20 @@ var StartPoint = StartPoint || {};
         // function publicFunction() {    
         // }
 
-          firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-        //we can save the extra data here
-       // btnLogOut.classList.remove("hide");
+        function fillUserData(user){
+            
+        }
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                //we can save the extra data here
+            console.log("user in profile sent from login");
+            console.log(user);
 
+            } else {
+                console.log("user not logged in")
 
-
-       console.log("user in profile sent from login");
-       console.log(user);
-
-      } else {
-        console.log("user not logged in")
-
-      }
-    });
+            }
+        });
 
         function updateUserInformation(Userdata){
             firebase.database().ref('items/').child(currentUserId).update(Userdata)

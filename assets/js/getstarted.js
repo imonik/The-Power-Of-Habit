@@ -19,7 +19,7 @@ var StartPoint = StartPoint || {};
 
         function initControls() {
             $("#habit").show();
-            //$("#signup").hide();   
+            $("#signup").hide();   
 
             $("#age").prepend("<option value=''>Select</option>").val('');
             $("#age").prop("selected", "selected")
@@ -46,10 +46,24 @@ var StartPoint = StartPoint || {};
 
                 var selectedHabit = $(this).text();
                 var id = parseInt($(this).data("id"));
-                if (!habitsArr.includes(selectedHabit)) {
-                    habit.id = id;
-                    habit.name = selectedHabit;
-                    habitsArr.push(habit);
+                var idTag = this.id;
+
+                if(habitsArr.length > 0){
+                    if (includesHabit(habitsArr, selectedHabit) == false) {
+                        $("#"+idTag).addClass("teal darken-2");//css("background-color","yellow");
+                        habit.id = id;
+                        habit.name = selectedHabit;
+                        habitsArr.push(habit);
+                    }
+                    else{
+                        $("#"+idTag).addClass("teal lighten-1")
+                        removeHabit(habitsArr, selectedHabit);
+                    }
+                }else {
+                    $("#"+idTag).addClass("teal darken-2");//css("background-color","yellow");
+                        habit.id = id;
+                        habit.name = selectedHabit;
+                        habitsArr.push(habit);
                 }
             });
 
@@ -87,42 +101,65 @@ var StartPoint = StartPoint || {};
                 var email = $("#txtLogEmail").val();
                 var logPass = $("#txtLogPassword").val()
 
-                if (email != "" && logPass != "") {
-                    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
-                        .then(function () {
-                            // Existing and future Auth states are now persisted in the current
-                            // session only. Closing the window would clear any existing state even
-                            // if a user forgets to sign out.
-                            // ...
-                            // New sign-in will be persisted with session persistence.
-                            //var promise = firebase.auth().signInWithEmailAndPassword(email, password);
-                            //promise.catch(e => console.log("message: " + e.message));
-                            firebase.auth().signInWithEmailAndPassword(email, logPass)
-                                .then(function (user) {
-                                    console.log("user " + user);
-                                    window.location.href = "profile.html";
-
-                                })
-                                .catch(function (error) {
-                                    // Handle Errors here.
-                                    var errorCode = error.code;
-                                    var errorMessage = error.message;
-                                    console.log(errorMessage);
-                                    // ...
-                                });
-                        })
-                        .catch(function (error) {
-                            // Handle Errors here.
-                            var errorCode = error.code;
-                            var errorMessage = error.message;
-                        });
-                }
+                userLogin(email, logPass);
             });
         }
 
 
         // function publicFunction() {    
         // }
+        function includesHabit(arr, habit){
+            var found = false;
+            for(var i = 0; i < arr.length; i++) {
+                if (arr[i].name == habit) {
+                    found = true;
+                    break;
+                }   
+            }
+            return found;
+        }
+
+        function removeHabit(arr, habit){
+            for(var i = 0; i < arr.length; i++) {
+                if (arr[i].name == habit) {
+                    delete arr[i];
+                }   
+            }
+        }
+
+
+        function userLogin(email, password){
+            if (email != "" && password != "") {
+                firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+                    .then(function () {
+                        // Existing and future Auth states are now persisted in the current
+                        // session only. Closing the window would clear any existing state even
+                        // if a user forgets to sign out.
+                        // ...
+                        // New sign-in will be persisted with session persistence.
+                        //var promise = firebase.auth().signInWithEmailAndPassword(email, password);
+                        //promise.catch(e => console.log("message: " + e.message));
+                        firebase.auth().signInWithEmailAndPassword(email, password)
+                            .then(function (user) {
+                                console.log("user " + user);
+                                window.location.href = "profile.html";
+
+                            })
+                            .catch(function (error) {
+                                // Handle Errors here.
+                                var errorCode = error.code;
+                                var errorMessage = error.message;
+                                console.log(errorMessage);
+                                // ...
+                            });
+                    })
+                    .catch(function (error) {
+                        // Handle Errors here.
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                    });
+            }
+        }
         function validateUserData() {
 
             var validData = true;
@@ -186,7 +223,7 @@ var StartPoint = StartPoint || {};
         
         return {
                 Init: init,
-                // PublicFuncion: publicFunction
+                UserLogin: userLogin
             };
     }();
 }) (jQuery);

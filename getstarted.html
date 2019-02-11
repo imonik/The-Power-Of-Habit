@@ -5,12 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/styles.css">
     <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Compiled and minified CSS Materialize-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<!-- Compiled and minified JavaScript Materialize -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<!-- Google font icons -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type="text/javascript" src="./assets/js/main.js"></script>
     <script type="text/javascript" src="./assets/js/config.js"></script>
     <script type="text/javascript" src="./assets/js/getstarted.js"></script>
@@ -21,10 +26,11 @@
     </script>
 
 </head>
+
 <body>
     <header>
         <nav>
-        <div class="nav-wrapper">
+            <div class="nav-wrapper">
                 <a href="#" class="brand-logo"> HABITUAL</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="home.html">Home</a></li>
@@ -37,87 +43,93 @@
         <div class="container">
             <div class="row">
                 <div id="habit" class="col s12">
+                    <div class="card-panel">
+                        <div class="card-content">
+                                <h2>I would like to built the habit of...</h2>
 
-                    <h2>I would like to built the habit of...</h2>
-                    <div id="habits">
-                        <button class="habits btn waves-effect waves-light" id="yoga" data-id="1">Yoga</button>
-                        <button class="habits btn waves-effect waves-light" id="gym" data-id="2">Gym</button>
-                        <button class="habits btn waves-effect waves-light" id="park" data-id="3">Park</button>
-                        <button class="habits btn waves-effect waves-light" id="a" data-id="4">a</button>
-                        <button class="habits btn waves-effect waves-light" id="b" data-id="5">b</button>
-                        <button class="habits btn waves-effect waves-light" id="c" data-id="6">c</button>
-                        <button class="habits btn waves-effect waves-light" id="d" data-id="7">d</button>
-                        <button class="habits btn waves-effect waves-light" id="e" data-id="8">e</button>
-                        <button class="habits btn waves-effect waves-light" id="f" data-id="9">f</button>
-                    </div>
-                    <div>
-                        <button id="btnNext btn waves-effect waves-light">Next</button>
-                    </div>
-
+                                <div id="habits">
+                                    <button class="habits btn-large waves-effect waves-light" id="yoga" data-id="1">Yoga</button>
+                                    <button class="habits btn-large waves-effect waves-light" id="gym" data-id="2">Gym</button>
+                                    <button class="habits btn-large waves-effect waves-light" id="park" data-selected = "no" data-id="3">Park</button>
+                                    <button class="habits btn-large waves-effect waves-light" id="a" data-selected = "no" data-id="4">a</button>
+                                    <button class="habits btn-large waves-effect waves-light" id="b" data-selected = "no" data-id="5">b</button>
+                                    <button class="habits btn-large waves-effect waves-light" id="c" data-selected = "no"  data-id="6">c</button>
+                                    <button class="habits btn-large waves-effect waves-light" id="d" data-selected = "no"  data-id="7">d</button>
+                                    <button class="habits btn-large waves-effect waves-light" id="e" data-selected = "no"  data-id="8">e</button>
+                                    <button class="habits btn-large waves-effect waves-light" id="f" data-selected = "no"  data-id="9">f</button>
+                                </div>
+                                <div>
+                                    <br>
+                                    <button id="btnNext" class="btn accent-1 waves-red">Next</button>
+                                </div>
+                        </div>
+                    </div>    
                 </div>
             </div>
             <div id="signup" class="row">
-                    <h1></h1>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input placeholder="First Name" id="txtName" type="text" class="validate">
-                            <label for="txtName">First Name</label>
-                            <span class="helper-text" data-error="wrong" data-success="right">e.g Bob</span>
-
+                <h1></h1>
+                <div id="habit" class="col s12">
+                    <div class="card-panel">
+                        <div class="card-content">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input placeholder="Name" id="txtName" type="text" class="validate">
+                                    <label for="txtName">Name</label>
+                                    <span class="helper-text" data-error="wrong" data-success="right">e.g Bob Anderson</span>
+                                </div>
+                                <!-- <div class="input-field col s6">
+                                    <input id="last_name" type="text" class="validate">
+                                    <label for="last_name">Last Name</label>
+                                    <span class="helper-text" data-error="wrong" data-success="right">e.g Anderson</span>
+                                </div> -->
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="txtEmail" type="email" class="validate">
+                                    <label for="txtEmail">Email</label>
+                                    <span class="helper-text" data-error="wrong" data-success="right">e.g Bob@gmail.com</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="txtPassword" type="password" class="validate">
+                                    <label for="txtPassword">Password</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="txtConfirmPassword" type="password" class="validate">
+                                    <label for="txtConfirmPassword">Confirm password</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12">
+                                    <label>Gender</label>
+                                    <select class="browser-default" id="gender">
+                                        <option value="" disabled selected>Choose your gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12">
+                                    <label>Age</label>
+                                    <select class="browser-default" id="age">
+                                    </select>
+                                </div>
+                            </div>
+                            <button id="btnSignUp">Sign Up</button>
                         </div>
-                        <!-- <div class="input-field col s6">
-                            <input id="last_name" type="text" class="validate">
-                            <label for="last_name">Last Name</label>
-                            <span class="helper-text" data-error="wrong" data-success="right">e.g Anderson</span>
-                        </div> -->
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="txtEmail" type="email" class="validate">
-                            <label for="txtEmail">Email</label>
-                            <span class="helper-text" data-error="wrong" data-success="right">e.g Bob@gmail.com</span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="txtPassword" type="password" class="validate">
-                            <label for="txtPassword">Password</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="txtConfirmPassword" type="password" class="validate">
-                            <label for="txtConfirmPassword">Confirm password</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s12">
-                            <label>Gender</label>
-                            <select class="browser-default" id="gender">
-                                <option value="" disabled selected>Choose your gender</option>
-                                <option value="1">Male</option>
-                                <option value="2">Female</option>
-                                <option value="3">Other</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s12">
-                            <label>Age</label>
-                            <select class="browser-default" id="age">
-                            </select>
-                        </div>
-                    </div>
-                    <button id="btnSignUp">Sign Up</button>
+                    </div>    
+                </div>
             </div>
-
         </div>
-        </div>
-        <div id="logIn">
+        <div id="logIn" style="display:none">
             <input type="email" name="" placeholder="email" id="txtLogEmail">
             <input type="password" name="" placeholder="password" id="txtLogPassword">
             <button id="btnLogIn">Login</button>
-
         </div>
     </main>
     <footer>
