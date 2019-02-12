@@ -67,7 +67,8 @@ var StartPoint = StartPoint || {};
                     });
             
                   } else {
-                    console.log("user not logged in")
+                    console.log("returning user to home");
+                    window.location.href="home.html"; 
             
                   }
                 });
