@@ -6276,7 +6276,7 @@ li.home:before {
 }
 
 .progress {
-  background-color: rgba(255, 64, 129, 0.22);
+  background-color: lightgray;
 }
 
 /* JavaScript Turned Off */
@@ -7325,6 +7325,10 @@ Cards
 .chart-revenue .chart-revenue-per i {
   position: relative;
   top: 5px;
+}
+
+.location:hover{
+  cursor: pointer;
 }
 
 .chart-revenue-switch {
@@ -8467,7 +8471,7 @@ tr.group:hover {
   position: relative;
 }
 
-#revenue-chart .yearly-revenue-chart canvas {
+#revenue-chart .yearly-revenue-chart {
   width: 100% !important;
   height: 350px !important;
 }

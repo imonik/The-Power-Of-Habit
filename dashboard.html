@@ -1,28 +1,251 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-	<link rel="stylesheet" type="text/css" href="./assets/css/styles.css">
-	<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-	<script type="text/javascript" src="./assets/js/main.js"></script>
-	<script type="text/javascript" src="./assets/js/config.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Compiled and minified CSS Materialize-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Google font icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./assets/css/styles.css">
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href="./assets/css/materialize.css" type="text/css" rel="stylesheet">
+    <link href="./assets/css/style.css" type="text/css" rel="stylesheet">
+    <!-- Custom CSS-->
+    <link href="./assets/css/custom.css" type="text/css" rel="stylesheet">
+    <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
+    <link href="./assets/css/flag-icon.min.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="./assets/js/main.js"></script>
+    <script type="text/javascript" src="./assets/js/config.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <style>
+        .collapsible-header, .collapsible-body {
+            color: #ffff;
+        }
+
+        .habitButton:hover{
+            background-color: #00AEFF;
+            color:white;
+            cursor: pointer;
+        }
+
+        .preloader-background {
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+    	background-color: #eee;
+            
+	    position: fixed;
+	    z-index: 100;
+	    top: 0;
+	    left: 0;
+	    right: 0;
+	    bottom: 0;	
+}
+
+    </style>
 </head>
-<body>
-	<header>
-		
-	</header>
-	<main>
-		<div class="container">
-			<div class="row">
-				
-			</div>
-		</div>
-	</main>
-	<footer>
-		
-	</footer>
+
+<body class="layout-semi-dark loaded" cz-shortcut-listen="true">
+
+    <main>
+        <div id="main">
+            <!-- START WRAPPER -->
+            <div class="wrapper">
+                <!-- START LEFT SIDEBAR NAV-->
+                <aside id="left-sidebar-nav" class="nav-lock nav-collapsible">
+
+                    <div class="brand-sidebar">
+                        <h1 class="logo-wrapper">
+                            <a href="index.html" class="brand-logo darken-1">
+                                <!-- ADD LOGO HERE -->
+                                <!-- <img src="./assets/imgs/apple-touch-icon-152x152.png" alt="materialize logo"> -->
+                                <span class="logo-text hide-on-med-and-down">Habitual</span>
+                            </a>
+
+                        </h1>
+                    </div>
+
+                    <ul id="slide-out" class=" collapsible side-nav fixed leftside-navigation ps-container ps-active-y">
+                        <ul class="collapsible expandable">
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+                                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
+                                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+                                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                            </li>
+                        </ul>
+                </aside>
+                <!-----------------MAP DIV HERE-------------------->
+                <div id="sales-chart">
+                    <div class="row">
+                        <div class="col s12 m12 l12">
+                            <div id="revenue-chart" class="card">
+                                <div class="card-content">
+                                    <div class="container text-center allLocations">
+                                        <h4 class="header mt-0">Find Habits :
+                                            <button class="btn location" data-state="false" data-position=1 data-name="gym fitness">Gym</button>
+                                            <button class="btn location" data-state="false" data-position=2 data-name="public park">Parks</button>
+                                            <button class="btn location" data-state="false" data-position=3 data-name="yoga">Yoga</button>
+                                            <button class="btn location" data-state="false" data-position=4 data-name="spin cycle class">Spin</button>
+                                            <button class="btn location" data-state="false" data-position=5 data-name="dance class">Dance</button>
+                                            <button class="btn location" data-state="false" data-position=6 data-name="rock climbing">Rock
+                                                Climbing</button>
+                                        </h4>
+                                    </div><br>
+                                    <!-- <h2>Find Near You: <input type="text"><button class="btn btn-primary" id="newButt" onclick="addButt()">Add</button> <button class="btn btn-warning" id="selectHabit">Select Habit!</button></h2> -->
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <div class="yearly-revenue-chart">
+                                                <div class="preloader-background">
+                                                    <div class="preloader-wrapper big active">
+                                                        <div class="spinner-layer spinner-blue-only">
+                                                            <div class="circle-clipper left">
+                                                                <div class="circle"></div>
+                                                            </div>
+                                                            <div class="gap-patch">
+                                                                <div class="circle"></div>
+                                                            </div>
+                                                            <div class="circle-clipper right">
+                                                                <div class="circle"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- MAP HERE -->
+                                                <div id="map" style="width:100%;height:90%;padding:100px;margin: auto;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="col s12 m4 l4">
+                                    <div id="weekly-earning" class="card">
+                                        <div class="card-content">
+                                            <h4 class="header m-0">DAYS
+
+                                            </h4>
+                                            <p class="no-margin grey-text lighten-3 medium-small">Mon, Wed, Fri</p>
+                                            <h3 class="header">$899.39
+
+                                            </h3>
+                                            <canvas id="monthlyEarning" class="" height="322" width="644" style="width: 322px; height: 161px;"></canvas>
+                                            <div class="center-align">
+                                                <p class="lighten-3">Total Weekly Earning</p>
+                                                <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">View
+                                                    Full</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                    </div>
+                </div>
+                <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+                <!-- Bottom Section
+                     Daily Data Chart -->
+                <div id="daily-data-chart">
+                    <div class="row">
+                        <div class="col s12 m4 l4">
+                            <div class="card pt-0 pb-0 habitButton" id="habit1">
+                                <div class="padding-2 ml-2">
+                                    <h4 id="habitName">Pick a Habit!</h4>
+                                    <div>
+                                        <p class="mt-2 mb-0" id="habitAddress"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s12 m4 l4">
+                            <div class="card pt-0 pb-0 habitButton" id="completeHabit1">
+                                <div class="padding-2 ml-2">
+                                    <h4>Complete Habit!</h4>
+                                    <div id="timerDisplay">0:00</div>
+                                    <div class="progress">
+                                        <div id="habit1Timer" class="determinate" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s12 m4 l4">
+                            <div class="card pt-0 pb-0" id="habit1Metrics">
+                                <div class="padding-2 ml-2">
+                                    <h5>$ 22,300</h5>
+                                    <p class="mt-2 mb-0">Today's revenue</p>
+                                    <p class="no-margin grey-text lighten-3">$40,512 avg</p>
+                                </div>
+                                <div class="row">
+                                    <div class="sample-chart-wrapper" style="margin-bottom: -14px; margin-top: -75px;">
+                                        <canvas id="custom-line-chart-sample-three" class="center" width="786" height="392"
+                                            style="width: 393px; height: 196px;"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!--end container-->
+        </div>
+        </section>
+        <!-- END CONTENT -->
+
+        </div>
+        <!-- END WRAPPER -->
+        </div>
+        <!-- END MAIN -->
+        <!-- //////////////////////////////////////////////////////////////////////////// -->
+        <!-- START FOOTER -->
+        <footer class="page-footer">
+            <div class="footer-copyright">
+                <div class="container">
+                    <span>Copyright ©
+
+                        <span class="right hide-on-small-only"> Design and Developed by Habitual</span>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script src="./assets/js/map.js"></script>
+    <script type="text/javascript">
+        $('.location').on('click', searchButton);
+        $('#habit1').on('click', function () {
+            markerSetAsHabit = true;
+        });
+
+        $('#completeHabit1').on('click', function () {
+            if (timerCanStart == true && getDistanceFromLatLonInFt(myPosition[0], myPosition[1], currentHabitCoord[0], currentHabitCoord[1])) {
+                timerVar = setInterval(timerQuarter, 1000);
+            }
+            timerCanStart = false;
+        });
+// <!-- 
+//         var elem = document.querySelector('.collapsible.expandable');
+//         var instance = M.Collapsible.init(elem, {
+//             accordion: false
+//         }); -->
+    </script>
+
+    <script>
+        var scriptTag = $('<script>').attr('src', `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`).attr('async', '').attr('defer', '');
+        $('body').append(scriptTag);
+    </script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./assets/js/materialize.min.js"></script>
 </body>
+
 </html>
