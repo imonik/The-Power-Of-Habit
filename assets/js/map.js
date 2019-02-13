@@ -1,5 +1,25 @@
 //-----------Firebase Code----------//
-
+var userDetail;
+function getCurrentUser(){
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            //we can save the extra data here
+             $("#btnLogOut").show();
+             $("#alogIn").hide();
+             currentUser = firebase.auth().currentUser;
+             currentUserId =  currentUser.uid;//firebase.auth().currentUser.uid; 
+             firebase.database().ref('items/'+ currentUserId).on('value', function(snapshot){
+                console.log("El snap" + snapshot.val());
+                userDetail = snapshot.val();
+                fillUserData(userDetail);
+            });
+    
+        } else {
+            console.log("returning user to home");
+            window.location.href="home.html"; 
+        }
+    });
+}
 
 
 
@@ -52,6 +72,8 @@ window.onload = function () {
         initMap();
     };
     navigator.geolocation.getCurrentPosition(geoSuccess);
+
+    //here can add firebase user auth session
 };
 
 function initMap() {
@@ -119,6 +141,8 @@ function createMarker(place) {
             markerSetAsHabit = false;
             timerCanStart = true;
             currentHabitCoord = [place.geometry.location.lat(), place.geometry.location.lng()];
+
+            //^^ this is setting habt cordinates
             $('#habitName').text(place.name);
             $('#habitAddress').text(place.formatted_address);
             $('#completeHabit1').show('slow');

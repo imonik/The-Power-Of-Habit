@@ -142,7 +142,7 @@ var StartPoint = StartPoint || {};
                         firebase.auth().signInWithEmailAndPassword(email, password)
                             .then(function (user) {
                                 console.log("user " + user);
-                                window.location.href = "profile.html";
+                                window.location.href = "dashboard.html";
 
                             })
                             .catch(function (error) {
