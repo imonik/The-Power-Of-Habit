@@ -2,16 +2,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Home</title>
-    <link rel="stylesheet" type="text/css" href="./assets/css/styles.css">
+    <!-- Compiled and minified CSS Materialize-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
     <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!-- Compiled and minified CSS Materialize-->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 	<!-- Compiled and minified JavaScript Materialize -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 	<!-- Google font icons -->
@@ -28,7 +28,7 @@
 </head>
 
 <body>
-    <header>
+    <!-- <header> -->
         <nav>
             <div class="nav-wrapper">
                 <a href="#" class="brand-logo"> HABITUAL</a>
@@ -72,16 +72,15 @@
                 </ul>
             </div>
         </nav>
-    </header>
+    <!-- </header> -->
     <main>
         <div class="container">
             <div class="row">
-                <div id="habit" class="col s12">
+                <div id="habit" class="col s12"> <!-- this needs to be fixed, cannot have 2 ids-->
                     <div class="card-panel">
                         <div class="card-content">
                                 <h2>I would like to built the habit of...</h2>
-
-                                <div id="habits">
+                                <div id="habits"><!-- this needs to be fixed, cannot have 2 ids-->
                                     <button class="habits btn-large waves-effect waves-light" id="yoga" data-id="1">Yoga</button>
                                     <button class="habits btn-large waves-effect waves-light" id="gym" data-id="2">Gym</button>
                                     <button class="habits btn-large waves-effect waves-light" id="park" data-selected = "no" data-id="3">Park</button>
