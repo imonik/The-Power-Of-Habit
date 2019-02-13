@@ -1,4 +1,4 @@
-var StartPoint = StartPoint || {};
+var Profile = Profile || {};
 (function ($, undefined) {
     firebase.initializeApp(config);
     var habitsArr= [];
@@ -14,73 +14,86 @@ var StartPoint = StartPoint || {};
     var currentUserId = "";
     var days = "";
     var currentUser;
+    var userDetail;
 
-    StartPoint.Index = function () {
+
+    Profile.Index = function () {
         function init() {
             initControls();
         }
         
         function initControls() {
             $("#btnLogOut").hide();
+            var select = $('#age');
+
+            for (var i = 18; i <= 100; i++) {
+                $('<option>', { value: i, text: i }).appendTo(select);
+            }
+
+            $("#gender").change(function () {
+                gender = $(this).children("option:selected").val();
+            });
+
+            $("#age").change(function () {
+                age = $(this).children("option:selected").val();
+            });
            
-             $("#btnLogOut").on("click", function(){
+            $("#btnLogOut").on("click", function(){
                 $("#btnLogOut").hide(); 
-                $("#btnUpdate").show();
-                firebase.auth().signOut()
-                .then(function() {
-                 console.log("Sign-out successful.");
-                 $("#btnLogOut").hide();
-                 window.location.href="getstarted.html"; 
-               })
-                .catch(function(error) {
-                 console.log(error.message);
-               });
-             });
+                $("#btnUpdate").hide();
+                $("#alogIn").hide();
+                logOut();
+            });
 
             $("#btnUpdate").on("click", function(){
-                console.log("on update");
-                currentUser.habits[0].frecuency=["Mo","We", "Fr"];
-                updateUserInformation(currentUser);
+                getUserData();
+                updateUserInformation(userDetail);
             });
 
             firebase.auth().onAuthStateChanged(user => {
                 if (user) {
                     //we can save the extra data here
                      $("#btnLogOut").show();
-                     currentUserId = firebase.auth().currentUser.uid; 
+                     $("#alogIn").hide();
+                     currentUser = firebase.auth().currentUser;
+                     currentUserId =  currentUser.uid;//firebase.auth().currentUser.uid; 
                      firebase.database().ref('items/'+ currentUserId).on('value', function(snapshot){
-                        console.log(snapshot.val());
-                        currentUser = snapshot.val();
-                    $("#name").append(user.displayName);
+                        console.log("El snap" + snapshot.val());
+                        userDetail = snapshot.val();
+                        fillUserData(userDetail);
                     });
-                   console.log("user in profile sent from login id");
-                   //console.log(user.currentUser);
             
                   } else {
-                    console.log("user not logged in")
-            
+                    console.log("returning user to home");
+                    window.location.href="home.html"; 
                   }
                 });
         }
 
-        // function publicFunction() {    
-        // }
+        function logOut(){
+            firebase.auth().signOut()
+            .then(function() {
+                console.log("Sign-out successful.");
+                $("#btnLogOut").hide();
+                window.location.href="home.html"; 
+            })
+            .catch(function(error) {
+                console.log(error.message);
+            });
+        }
 
-          firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-        //we can save the extra data here
-       // btnLogOut.classList.remove("hide");
+        function fillUserData(user){
+            $("#txtName").val(user.name);
+            $("#txtEmail").val(currentUser.email);
+            $("#gender").val(user.gender);
+            $("#age").val(user.age);
+        }
 
-
-
-       console.log("user in profile sent from login");
-       console.log(user);
-
-      } else {
-        console.log("user not logged in")
-
-      }
-    });
+        function getUserData(){
+           userDetail.name =  $("#txtName").val();
+           userDetail.gender = $("#gender").val();
+           userDetail.age = $("#age").val();
+        }
 
         function updateUserInformation(Userdata){
             firebase.database().ref('items/').child(currentUserId).update(Userdata)
@@ -98,11 +111,9 @@ var StartPoint = StartPoint || {};
                 });
         }
 
-      
-
         return {
             Init: init,
-            // PublicFuncion: publicFunction
+            LogOut: logOut
         };
 
     }();
