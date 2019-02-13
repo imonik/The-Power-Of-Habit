@@ -1,29 +1,39 @@
 //-----------Firebase Code----------//
 var userDetail;
+var currentUserId;
+
+
 function getCurrentUser(){
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
-            //we can save the extra data here
-             $("#btnLogOut").show();
-             $("#alogIn").hide();
              currentUser = firebase.auth().currentUser;
-             currentUserId =  currentUser.uid;//firebase.auth().currentUser.uid; 
+             currentUserId =  currentUser.uid; 
              firebase.database().ref('items/'+ currentUserId).on('value', function(snapshot){
-                console.log("El snap" + snapshot.val());
                 userDetail = snapshot.val();
-                fillUserData(userDetail);
+                //Expected Result
+                //{age: "32", gender: "Female", habits: [{daysLeft: 0, frecuency: ["Mo", "We", "Fr"], id: 1, location: {lat: 0, long: 0}, name: "Yoga"},{{daysLeft: 0, frecuency: ["Mo", "We", "Fr"], id: 1, location: {lat: 0, long: 0}, name: "Gym"}}], name: "Monica Desantiago 2"}
             });
     
         } else {
-            console.log("returning user to home");
+            console.log("returning to home user not logged in");
             window.location.href="home.html"; 
         }
     });
 }
-
-
-
-
+function updateUserInformation(Userdata){
+    firebase.database().ref('items/').child(currentUserId).update(Userdata)
+        .then((snap) => {
+            //TODO: PLEASE RETURN TO A PROPER PAGE IT CAN BE THE SAME PAGE YOU ARE 
+            window.location.href="profile.html"; 
+        }).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            showError(errorMessage);
+            console.log(errorMessage);
+            // ...
+        });
+}
 //----------------------------------//
 
 var map, service, infowindow, marker, center, startPos, posLat, posLong, searchState, queryText, myPosition, iconLink;
@@ -74,6 +84,7 @@ window.onload = function () {
     navigator.geolocation.getCurrentPosition(geoSuccess);
 
     //here can add firebase user auth session
+    getCurrentUser();
 };
 
 function initMap() {
@@ -150,6 +161,9 @@ function createMarker(place) {
             $('#habit1Metrics').show('slow');
             $('.progress').show('slow');
             $('#timerDisplay').show('slow');
+            //I have more than one habit under my username
+            //userDetail.habits[0].location.lat = 123456
+            //userDetail.habits[0].location.long = 123456
         }
     });
     placeArray[queryPosition].push(marker);

@@ -1,6 +1,6 @@
 var StartPoint = StartPoint || {};
 (function ($, undefined) {
-    firebase.initializeApp(config);
+    //firebase.initializeApp(config);
     var habitsArr = [];
     var emailRegex = new RegExp("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
     var userData = { name: "", gender: "", age: 0, badges: [], habits: [] };

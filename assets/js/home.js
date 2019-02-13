@@ -18,7 +18,15 @@ var Home = Home || {};
             });
 
             $("#btnLogOut").on("click", function() {
-                Profile.Index.LogOut();
+                firebase.auth().signOut()
+                .then(function() {
+                    console.log("Sign-out successful.");
+                    $("#btnLogOut").hide();
+                    window.location.href="home.html"; 
+                })
+                .catch(function(error) {
+                    console.log(error.message);
+                });
             });
 
             firebase.auth().onAuthStateChanged(user => {
