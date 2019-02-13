@@ -75,7 +75,6 @@ var StartPoint = StartPoint || {};
             });
 
             $("#btnSignUp").on("click", function () {
-
                 if (validateUserData()) {
                     userData.name = name;
                     userData.gender = gender;
@@ -100,7 +99,6 @@ var StartPoint = StartPoint || {};
             });
 
             $("#aLogin").on("click", function () {
-                console.log("a click");
                 var email = $("#txtLogEmail").val();
                 var logPass = $("#txtLogPassword").val()
 
@@ -129,7 +127,6 @@ var StartPoint = StartPoint || {};
                 }   
             }
         }
-
 
         function userLogin(email, password){
             if (email != "" && password != "") {
@@ -163,6 +160,7 @@ var StartPoint = StartPoint || {};
                     });
             }
         }
+
         function validateUserData() {
 
             var validData = true;

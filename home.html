@@ -20,8 +20,7 @@
 	<script type="text/javascript" src="./assets/js/config.js"></script>
 	<script type="text/javascript" src="./assets/js/home.js"></script>
 	<script type="text/javascript" src="./assets/js/getstarted.js"></script>
-
-	
+	<script type="text/javascript" src="./assets/js/profile.js"></script>
 </head>
 <body>
 	<header>
@@ -34,7 +33,7 @@
 					<li><a id="btnLogOut" class="waves-effect waves-light btn modal-trigger">Log Out</a></li>
 					<li>
 						<!-- Modal Trigger -->
-						<a class="waves-effect waves-light btn modal-trigger" href="#modal1">Login</a>
+						<a id="aLoginNav" class="waves-effect waves-light btn modal-trigger" href="#modal1">Login</a>
 
 						<!-- Modal Structure -->
 						<div id="modal1" class="modal modal-fixed-footer">
@@ -104,32 +103,9 @@
 	<script>
 		$(document).ready(function () {
 			Home.Index.Init();
+			//Profile.Index.Init();
 		});
 	</script>
-	<!-- <script type="text/javascript">
-		// document.addEventListener('DOMContentLoaded', function () {
-		// 	var elems = document.querySelectorAll('.materialboxed');
-		// 	var instances = M.Materialbox.init(elems, options);
-		// });
-
-		// Or with jQuery
-
-		// $(document).ready(function () {
-		// 	$('.materialboxed').materialbox();
-		// });
-
-		// document.addEventListener('DOMContentLoaded', function () {
-		// 	var elems = document.querySelectorAll('.modal');
-		// 	var instances = M.Modal.init(elems, options);
-		// });
-
-		// Or with jQuery
-
-		$(document).ready(function () {
-			$('.materialboxed').materialbox();
-			$('.modal').modal();
-		});
-	</script> -->
 </body>
 
 </html>
