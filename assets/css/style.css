@@ -6276,7 +6276,7 @@ li.home:before {
 }
 
 .progress {
-  background-color: rgba(255, 64, 129, 0.22);
+  background-color: lightgray;
 }
 
 /* JavaScript Turned Off */
@@ -8473,7 +8473,7 @@ tr.group:hover {
 
 #revenue-chart .yearly-revenue-chart {
   width: 100% !important;
-  height: 400px !important;
+  height: 350px !important;
 }
 
 #revenue-chart .yearly-revenue-chart canvas.firstShadow {

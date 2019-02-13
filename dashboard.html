@@ -22,8 +22,29 @@
 
     <style>
         .collapsible-header, .collapsible-body {
-        color: #ffff;
-    }
+            color: #ffff;
+        }
+
+        .habitButton:hover{
+            background-color: #00AEFF;
+            color:white;
+            cursor: pointer;
+        }
+
+        .preloader-background {
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+    	background-color: #eee;
+            
+	    position: fixed;
+	    z-index: 100;
+	    top: 0;
+	    left: 0;
+	    right: 0;
+	    bottom: 0;	
+}
+
     </style>
 </head>
 
@@ -62,118 +83,52 @@
                                 <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
                             </li>
                         </ul>
-
-
                 </aside>
-
-
-                <!-- END LEFT SIDEBAR NAV-->
-                <!-- //////////////////////////////////////////////////////////////////////////// -->
-                <!-- START CONTENT -->
-                <section id="content">
-                    <!--start container-->
-                    <div class="container">
-                        <!--card stats start-->
-                        <div id="card-stats">
-                            <div class="row">
-                                <div class="col s12 m6 l3">
-                                    <div class="card gradient-45deg-light-blue-cyan gradient-shadow min-height-100 white-text">
-                                        <div class="padding-4">
-                                            <div class="col s7 m7">
-
-                                                <p>Data1</p>
-                                            </div>
-                                            <div class="col s5 m5 right-align">
-                                                <h5 class="mb-0">690</h5>
-                                                <p class="no-margin">Streak</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col s12 m6 l3">
-                                    <div class="card gradient-45deg-red-pink gradient-shadow min-height-100 white-text">
-                                        <div class="padding-4">
-                                            <div class="col s7 m7">
-
-                                                <p>Clients</p>
-                                            </div>
-                                            <div class="col s5 m5 right-align">
-                                                <h5 class="mb-0">1885</h5>
-                                                <p class="no-margin">Miles</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col s12 m6 l3">
-                                    <div class="card gradient-45deg-amber-amber gradient-shadow min-height-100 white-text">
-                                        <div class="padding-4">
-                                            <div class="col s7 m7">
-
-                                                <p>Frequency</p>
-                                            </div>
-                                            <div class="col s5 m5 right-align">
-                                                <h5 class="mb-0">5 days</h5>
-                                                <p class="no-margin">Frequency</p>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col s12 m6 l3">
-                                    <div class="card gradient-45deg-green-teal gradient-shadow min-height-100 white-text">
-                                        <div class="padding-4">
-                                            <div class="col s7 m7">
-
-                                                <p>Total Days Left</p>
-                                            </div>
-                                            <div class="col s5 m5 right-align">
-                                                <h5 class="mb-0">30</h5>
-                                                <p class="no-margin">Days Left</p>
-
+                <!-----------------MAP DIV HERE-------------------->
+                <div id="sales-chart">
+                    <div class="row">
+                        <div class="col s12 m12 l12">
+                            <div id="revenue-chart" class="card">
+                                <div class="card-content">
+                                    <div class="container text-center allLocations">
+                                        <h4 class="header mt-0">Find Habits :
+                                            <button class="btn location" data-state="false" data-position=1 data-name="gym fitness">Gym</button>
+                                            <button class="btn location" data-state="false" data-position=2 data-name="public park">Parks</button>
+                                            <button class="btn location" data-state="false" data-position=3 data-name="yoga">Yoga</button>
+                                            <button class="btn location" data-state="false" data-position=4 data-name="spin cycle class">Spin</button>
+                                            <button class="btn location" data-state="false" data-position=5 data-name="dance class">Dance</button>
+                                            <button class="btn location" data-state="false" data-position=6 data-name="rock climbing">Rock
+                                                Climbing</button>
+                                        </h4>
+                                    </div><br>
+                                    <!-- <h2>Find Near You: <input type="text"><button class="btn btn-primary" id="newButt" onclick="addButt()">Add</button> <button class="btn btn-warning" id="selectHabit">Select Habit!</button></h2> -->
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <div class="yearly-revenue-chart">
+                                                <div class="preloader-background">
+                                                    <div class="preloader-wrapper big active">
+                                                        <div class="spinner-layer spinner-blue-only">
+                                                            <div class="circle-clipper left">
+                                                                <div class="circle"></div>
+                                                            </div>
+                                                            <div class="gap-patch">
+                                                                <div class="circle"></div>
+                                                            </div>
+                                                            <div class="circle-clipper right">
+                                                                <div class="circle"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- MAP HERE -->
+                                                <div id="map" style="width:100%;height:90%;padding:100px;margin: auto;"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!--card stats end-->
-                        <!--yearly & weekly revenue chart start-->
-
-                        <!-----------------MAP DIV HERE-------------------->
-                        <div id="sales-chart">
-                            <div class="row">
-                                <div class="col s12 m12 l12">
-                                    <div id="revenue-chart" class="card">
-                                        <div class="card-content">
-                                            <div class="container text-center allLocations">
-                                                <h4 class="header mt-0">Find Habits :
-                                                    <button class="btn location" data-state="false" data-position=1
-                                                        data-name="gym fitness">Gym</button>
-                                                    <button class="btn location" data-state="false" data-position=2
-                                                        data-name="public park">Parks</button>
-                                                    <button class="btn location" data-state="false" data-position=3
-                                                        data-name="yoga">Yoga</button>
-                                                    <button class="btn location" data-state="false" data-position=4
-                                                        data-name="spin cycle class">Spin</button>
-                                                    <button class="btn location" data-state="false" data-position=5
-                                                        data-name="dance class">Dance</button>
-                                                    <button class="btn location" data-state="false" data-position=6
-                                                        data-name="rock climbing">Rock Climbing</button>
-                                                </h4>
-                                            </div><br>
-                                            <!-- <h2>Find Near You: <input type="text"><button class="btn btn-primary" id="newButt" onclick="addButt()">Add</button> <button class="btn btn-warning" id="selectHabit">Select Habit!</button></h2> -->
-                                            <div class="row">
-                                                <div class="col s12">
-                                                    <div class="yearly-revenue-chart">
-                                                        <!-- MAP HERE -->
-                                                        <div id="map" style="width:100%;height:90%;padding:100px;margin: auto;"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- <div class="col s12 m4 l4">
+                        <!-- <div class="col s12 m4 l4">
                                     <div id="weekly-earning" class="card">
                                         <div class="card-content">
                                             <h4 class="header m-0">DAYS
@@ -192,71 +147,56 @@
                                         </div>
                                     </div>
                                 </div> -->
-                            </div>
-                        </div>
-                        <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-                        <!-- Bottom Section
-                     Daily Data Chart -->
-                        <div id="daily-data-chart">
-                            <div class="row">
-                                <div class="col s12 m4 l4">
-                                    <div class="card pt-0 pb-0">
-                                        <div class="padding-2 ml-2">
-                                            <span class="new badge gradient-45deg-light-blue-cyan gradient-shadow mt-2 mr-2">+
-                                                42.6%</span>
-                                            <p class="mt-2 mb-0">Members online</p>
-                                            <p class="no-margin grey-text lighten-3">360 avg</p>
-                                            <h5>3,450</h5>
-                                        </div>
-                                        <div class="row">
-                                            <div class="sample-chart-wrapper" style="margin-bottom: -14px; margin-top: -75px;">
-                                                <canvas id="custom-line-chart-sample-one" class="center" width="786"
-                                                    height="392" style="width: 393px; height: 196px;"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col s12 m4 l4">
-                                    <div class="card pt-0 pb-0">
-                                        <div class="padding-2 ml-2">
-                                            <span class="new badge gradient-45deg-purple-deep-orange gradient-shadow mt-2 mr-2">+
-                                                12%</span>
-                                            <p class="mt-2 mb-0">Current server load</p>
-                                            <p class="no-margin grey-text lighten-3">23.1% avg</p>
-                                            <h5>+2500</h5>
-                                        </div>
-                                        <div class="row">
-                                            <div class="sample-chart-wrapper" style="margin-bottom: -14px; margin-top: -75px;">
-                                                <canvas id="custom-line-chart-sample-two" class="center" width="786"
-                                                    height="392" style="width: 393px; height: 196px;"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col s12 m4 l4">
-                                    <div class="card pt-0 pb-0">
-                                        <div class="padding-2 ml-2">
-                                            <span class="new badge gradient-45deg-amber-amber gradient-shadow mt-2 mr-2">+
-                                                $900</span>
-                                            <p class="mt-2 mb-0">Today's revenue</p>
-                                            <p class="no-margin grey-text lighten-3">$40,512 avg</p>
-                                            <h5>$ 22,300</h5>
-                                        </div>
-                                        <div class="row">
-                                            <div class="sample-chart-wrapper" style="margin-bottom: -14px; margin-top: -75px;">
-                                                <canvas id="custom-line-chart-sample-three" class="center" width="786"
-                                                    height="392" style="width: 393px; height: 196px;"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
+                </div>
+                <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+                <!-- Bottom Section
+                     Daily Data Chart -->
+                <div id="daily-data-chart">
+                    <div class="row">
+                        <div class="col s12 m4 l4">
+                            <div class="card pt-0 pb-0 habitButton" id="habit1">
+                                <div class="padding-2 ml-2">
+                                    <h4 id="habitName">Pick a Habit!</h4>
+                                    <div>
+                                        <p class="mt-2 mb-0" id="habitAddress"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s12 m4 l4">
+                            <div class="card pt-0 pb-0 habitButton" id="completeHabit1">
+                                <div class="padding-2 ml-2">
+                                    <h4>Complete Habit!</h4>
+                                    <div id="timerDisplay">0:00</div>
+                                    <div class="progress">
+                                        <div id="habit1Timer" class="determinate" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s12 m4 l4">
+                            <div class="card pt-0 pb-0" id="habit1Metrics">
+                                <div class="padding-2 ml-2">
+                                    <h5>$ 22,300</h5>
+                                    <p class="mt-2 mb-0">Today's revenue</p>
+                                    <p class="no-margin grey-text lighten-3">$40,512 avg</p>
+                                </div>
+                                <div class="row">
+                                    <div class="sample-chart-wrapper" style="margin-bottom: -14px; margin-top: -75px;">
+                                        <canvas id="custom-line-chart-sample-three" class="center" width="786" height="392"
+                                            style="width: 393px; height: 196px;"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
-            <!--end container-->
+
+        </div>
+        <!--end container-->
         </div>
         </section>
         <!-- END CONTENT -->
@@ -279,20 +219,33 @@
     </main>
 
     <script src="./assets/js/map.js"></script>
-
-    <script>
-        var scriptTag = $('<script>').attr('src', `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initialize`).attr('async', '').attr('defer', '');
-        $('body').append(scriptTag);
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="./assets/js/materialize.min.js"></script>
     <script type="text/javascript">
-        var elem = document.querySelector('.collapsible.expandable');
-        var instance = M.Collapsible.init(elem, {
-            accordion: false
+        $('.location').on('click', searchButton);
+        $('#habit1').on('click', function () {
+            markerSetAsHabit = true;
         });
 
+        $('#completeHabit1').on('click', function () {
+            if (timerCanStart == true && getDistanceFromLatLonInFt(myPosition[0], myPosition[1], currentHabitCoord[0], currentHabitCoord[1])) {
+                timerVar = setInterval(timerQuarter, 1000);
+            }
+            timerCanStart = false;
+        });
+
+        // var elem = document.querySelector('.collapsible.expandable');
+        // var instance = M.Collapsible.init(elem, {
+        //     accordion: false
+        // });
     </script>
+
+    <script>
+        var scriptTag = $('<script>').attr('src', `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`).attr('async', '').attr('defer', '');
+        $('body').append(scriptTag);
+    </script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./assets/js/materialize.min.js"></script>
 </body>
 
 </html>
