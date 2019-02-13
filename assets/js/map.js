@@ -1,3 +1,11 @@
+//-----------Firebase Code----------//
+
+
+
+
+
+//----------------------------------//
+
 var map, service, infowindow, marker, center, startPos, posLat, posLong, searchState, queryText, myPosition, iconLink;
 var queryPosition = 0;
 var queryPositionCounter = 7;
