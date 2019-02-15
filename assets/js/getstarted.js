@@ -2,6 +2,7 @@ var StartPoint = StartPoint || {};
 (function ($, undefined) {
     //firebase.initializeApp(config);
     var habitsArr = [];
+    var preloadArr = [];
     var emailRegex = new RegExp("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
     var userData = { name: "", gender: "", age: 0, badges: [], habits: [] };
     var days = [];
@@ -44,7 +45,8 @@ var StartPoint = StartPoint || {};
             });
 
             $(".habits").on("click", function () {
-                var habit = { id: 0, state: false, position: 0,  name: "", streak: 0, daysLeft: 0, frequency: [], location: { long: 0, lat: 0 } };
+                var habit = { id: 0,  name: "", streak: 0, daysLeft: 0, frequency: [], location: { long: 0, lat: 0 } };
+                var preload = { state: false, position: 0,  name: ""};
 
                 var selectedHabit = $(this).data("name");
                 var id = parseInt($(this).data("id"));
@@ -56,8 +58,10 @@ var StartPoint = StartPoint || {};
                         //data-state="false" data-position=3 data-name="yoga"
                         habit.id = id;
                         habit.name = selectedHabit;
-                        habit.state = $("#"+idTag).data("state");
-                        habit.position = $("#"+idTag).data("position");
+                        preload.name = $(this).data("name");
+                        preload.state = $("#"+idTag).data("state");
+                        preload.position = $("#"+idTag).data("position");
+                        preloadArr.push(preload);
                         habitsArr.push(habit);
                     }
                     else{
@@ -71,6 +75,10 @@ var StartPoint = StartPoint || {};
                         habit.state = $("#"+idTag).data("state");
                         habit.position = $("#"+idTag).data("position");
                         habitsArr.push(habit);
+                        preload.name = $(this).data("name");
+                        preload.state = $("#"+idTag).data("state");
+                        preload.position = $("#"+idTag).data("position");
+                        preloadArr.push(preload);
                 }
             });
 
@@ -85,6 +93,7 @@ var StartPoint = StartPoint || {};
                     userData.gender = gender;
                     userData.age = age;
                     userData.habits = habitsArr;
+                    userData.preload = preloadArr;
 
                     firebase.auth().createUserWithEmailAndPassword(email, password)
                         .then(function (user) {
@@ -211,7 +220,7 @@ var StartPoint = StartPoint || {};
                     firebase.database().ref('items/').child(user.uid).set(userData)
                         .then(function (snap) {
                             console.log(snap)
-                            window.location.href = "profile.html";
+                            window.location.href = "dashboard.html";
                             $("name").text();
                         }).catch(function () {
                             var errorCode = error.code;
