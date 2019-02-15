@@ -180,7 +180,7 @@
                                 <p class="mt-2 mb-0" id="habitAddress"></p>
                             </div>
                             <!-- Modal Trigger -->
-                            <button data-target="modal2" class="btn modal-trigger">Modify</button>
+                            <button data-target="modal2" class="btn modal-trigger" id="modifyHabit">Modify</button>
 
                             <!-- Modal Structure -->
                             <div id="modal2" class="modal">
@@ -190,7 +190,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <!-- Add redirect to href below for MODIFY BUTTON -->
-                                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                                    <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="agreeModify">Agree</a>
                                 </div>
                             </div>
 
@@ -260,7 +260,7 @@
             setHabitButtonState = true
         }
 
-        $('#modifyHabit').on('click', resetHabit);
+        $('#agreeModify').on('click', resetHabit);
 
         $('.location').on('click', searchButton);
         $('#habit1').on('click', function () {
