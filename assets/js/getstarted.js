@@ -44,17 +44,20 @@ var StartPoint = StartPoint || {};
             });
 
             $(".habits").on("click", function () {
-                var habit = { id: 0, name: "", streak: 0, daysLeft: 0, frequency: [], location: { long: 0, lat: 0 } };
+                var habit = { id: 0, state: false, position: 0,  name: "", streak: 0, daysLeft: 0, frequency: [], location: { long: 0, lat: 0 } };
 
-                var selectedHabit = $(this).text();
+                var selectedHabit = $(this).data("name");
                 var id = parseInt($(this).data("id"));
                 var idTag = this.id;
 
                 if(habitsArr.length > 0){
                     if (includesHabit(habitsArr, selectedHabit) == false) {
                         $("#"+idTag).addClass("teal darken-2");//css("background-color","yellow");
+                        //data-state="false" data-position=3 data-name="yoga"
                         habit.id = id;
                         habit.name = selectedHabit;
+                        habit.state = $("#"+idTag).data("state");
+                        habit.position = $("#"+idTag).data("position");
                         habitsArr.push(habit);
                     }
                     else{
@@ -65,6 +68,8 @@ var StartPoint = StartPoint || {};
                     $("#"+idTag).addClass("teal darken-2");//css("background-color","yellow");
                         habit.id = id;
                         habit.name = selectedHabit;
+                        habit.state = $("#"+idTag).data("state");
+                        habit.position = $("#"+idTag).data("position");
                         habitsArr.push(habit);
                 }
             });
