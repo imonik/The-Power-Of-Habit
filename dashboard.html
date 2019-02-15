@@ -179,7 +179,21 @@
                             <div>
                                 <p class="mt-2 mb-0" id="habitAddress"></p>
                             </div>
-                            <button class="btn center-align" id="modifyHabit">Modify</button>
+                            <!-- Modal Trigger -->
+                            <button data-target="modal2" class="btn modal-trigger">Modify</button>
+
+                            <!-- Modal Structure -->
+                            <div id="modal2" class="modal">
+                                <div class="modal-content grey-text">
+                                    
+                                    <p>Are you sure you want to quit?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <!-- Add redirect to href below for MODIFY BUTTON -->
+                                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -198,7 +212,7 @@
                     <div class="card pt-0 pb-0" id="habit1Metrics">
                         <div class="padding-2 ml-2">
                             <h5>$ 22,300</h5>
-                            <p class="mt-2 mb-0">Today's revenue</p>
+                            <p class="mt-2 mb-0">Streak Graph</p>
                             <p class="no-margin grey-text lighten-3">$40,512 avg</p>
                         </div>
                         <div class="row">
@@ -245,7 +259,7 @@
             $('#habitAddress').text('');
         }
 
-        $('#modifyHabit').on('click',resetHabit);
+        $('#modifyHabit').on('click', resetHabit);
 
         $('.location').on('click', searchButton);
         $('#habit1').on('click', function () {
@@ -253,20 +267,28 @@
         });
 
         $('#completeHabit1').on('click', function () {
-            if (timerCanStart == true && getDistanceFromLatLonInFt(myPosition[0], myPosition[1], userDetail.habits[0].location.lat, userDetail.habits[0].location.long)) {
+            if (timerCanStart == true && getDistanceFromLatLonInFt(myPosition[0], myPosition[1], userDetail.habits[
+                    0].location.lat, userDetail.habits[0].location.long)) {
                 timerVar = setInterval(timerQuarter, 1000);
             }
             timerCanStart = false;
         });
-// <!-- 
-//         var elem = document.querySelector('.collapsible.expandable');
-//         var instance = M.Collapsible.init(elem, {
-//             accordion: false
-//         }); -->
+        // <!-- 
+        //         var elem = document.querySelector('.collapsible.expandable');
+        //         var instance = M.Collapsible.init(elem, {
+        //             accordion: false
+        //         }); -->
     </script>
 
     <script>
-        var scriptTag = $('<script>').attr('src', `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`).attr('async', '').attr('defer', '');
+        // Or with jQuery
+        $(document).ready(function () {
+            $('.modal').modal();
+        });
+
+        var scriptTag = $('<script>').attr('src',
+            `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`).attr('async', '').attr(
+            'defer', '');
         $('body').append(scriptTag);
     </script>
 
