@@ -47,6 +47,7 @@ function updateUserInformation(Userdata){
 //----------------------------------//
 
 var map, service, infowindow, marker, center, startPos, posLat, posLong, searchState, queryText, myPosition, iconLink, icon;
+var setHabitButtonState = true;
 var queryPosition = 0;
 var queryPositionCounter = 7;
 var markerSetAsHabit = false;
@@ -169,6 +170,7 @@ function createMarker(place) {
 
         if (markerSetAsHabit == true) {
             markerSetAsHabit = false;
+            setHabitButtonState = false;
             timerCanStart = true;
             currentHabitCoord = [place.geometry.location.lat(), place.geometry.location.lng()];
             userDetail.habits[0].location.lat = currentHabitCoord[0];
@@ -185,6 +187,7 @@ function createMarker(place) {
             $('#habit1Metrics').show('slow');
             $('.progress').show('slow');
             $('#timerDisplay').show('slow');
+            $('#modifyHabit').show('slow');
             //I have more than one habit under my username
             //userDetail.habits[0].location.lat = 123456
             //userDetail.habits[0].location.long = 123456
