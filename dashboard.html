@@ -243,13 +243,16 @@
             $('#modifyHabit').hide('slow');
             $('#habitName').text('Pick a Habit!');
             $('#habitAddress').text('');
+            setHabitButtonState = true
         }
 
         $('#modifyHabit').on('click',resetHabit);
 
         $('.location').on('click', searchButton);
         $('#habit1').on('click', function () {
-            markerSetAsHabit = true;
+            if(setHabitButtonState == true){
+                markerSetAsHabit = true;
+            }
         });
 
         $('#completeHabit1').on('click', function () {
