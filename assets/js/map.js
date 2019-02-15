@@ -87,6 +87,8 @@ window.onload = function () {
     $('#completeHabit1').hide();
     $('#habit1Metrics').hide();
     getCurrentUser();
+
+    // for(var i = 0; i<userDetail.habits)
 };
 
 function initMap() {
