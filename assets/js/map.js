@@ -110,7 +110,7 @@ function initMap() {
     $('.preloader-background').delay(600).fadeOut('slow');
     $('.preloader-wrapper').fadeOut();
     console.log(userDetail.habits.length);
-    if(userDetail.habits.length == 0){
+    if(userDetail.habits[0].address == ""){
         return;
     }else{
         marker = new google.maps.Marker({
@@ -119,6 +119,7 @@ function initMap() {
         });
         timerCanStart = true;
         markerSetAsHabit = false;
+        setHabitButtonState = false;
         $('#habitName').text(userDetail.habits[0].name);
         $('#habitAddress').text(userDetail.habits[0].address);
         $('#completeHabit1').show('slow');
