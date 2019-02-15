@@ -10,8 +10,17 @@ function getCurrentUser(){
              currentUserId =  currentUser.uid; 
              firebase.database().ref('items/'+ currentUserId).on('value', function(snapshot){
                 userDetail = snapshot.val();
+                console.log(userDetail);
                 //Expected Result
                 //{age: "32", gender: "Female", habits: [{daysLeft: 0, frecuency: ["Mo", "We", "Fr"], id: 1, location: {lat: 0, long: 0}, name: "Yoga"},{{daysLeft: 0, frecuency: ["Mo", "We", "Fr"], id: 1, location: {lat: 0, long: 0}, name: "Gym"}}], name: "Monica Desantiago 2"}
+                var geoSuccess = function (position) {
+                    startPos = position;
+                    posLat = position.coords.latitude;
+                    posLong = position.coords.longitude;
+                    initMap();
+                };
+                navigator.geolocation.getCurrentPosition(geoSuccess);
+            
             });
     
         } else {
@@ -24,19 +33,20 @@ function updateUserInformation(Userdata){
     firebase.database().ref('items/').child(currentUserId).update(Userdata)
         .then((snap) => {
             //TODO: PLEASE RETURN TO A PROPER PAGE IT CAN BE THE SAME PAGE YOU ARE 
-            window.location.href="profile.html"; 
+            // window.location.href="dashboard.html"; 
         }).catch(function(error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
             showError(errorMessage);
+            console.log(errorCode);
             console.log(errorMessage);
             // ...
         });
 }
 //----------------------------------//
 
-var map, service, infowindow, marker, center, startPos, posLat, posLong, searchState, queryText, myPosition, iconLink;
+var map, service, infowindow, marker, center, startPos, posLat, posLong, searchState, queryText, myPosition, iconLink, icon;
 var queryPosition = 0;
 var queryPositionCounter = 7;
 var markerSetAsHabit = false;
@@ -75,22 +85,13 @@ window.onload = function () {
     $('#timerDisplay').hide();
     $('#completeHabit1').hide();
     $('#habit1Metrics').hide();
-    var geoSuccess = function (position) {
-        startPos = position;
-        posLat = position.coords.latitude;
-        posLong = position.coords.longitude;
-        initMap();
-    };
-    navigator.geolocation.getCurrentPosition(geoSuccess);
-
-    //here can add firebase user auth session
     getCurrentUser();
 };
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: posLat, lng: posLong },
-        zoom: 16
+        zoom: 15
     });
     marker = new google.maps.Marker({
         position: { lat: posLat, lng: posLong },
@@ -107,6 +108,24 @@ function initMap() {
     myPosition = [posLat, posLong];
     $('.preloader-background').delay(600).fadeOut('slow');
     $('.preloader-wrapper').fadeOut();
+    console.log(userDetail.habits.length);
+    if(userDetail.habits.length == 0){
+        return;
+    }else{
+        marker = new google.maps.Marker({
+            position: { lat: userDetail.habits[0].location.lat, lng: userDetail.habits[0].location.long},
+            map: map
+        });
+        timerCanStart = true;
+        markerSetAsHabit = false;
+        $('#habitName').text(userDetail.habits[0].name);
+        $('#habitAddress').text(userDetail.habits[0].address);
+        $('#completeHabit1').show('slow');
+        $('#completeHabit1').show('slow');
+        $('#habit1Metrics').show('slow');
+        $('.progress').show('slow');
+        $('#timerDisplay').show('slow');
+    }
 }
 
 function searchPlaces() {
@@ -132,7 +151,7 @@ function callback(results, status) {
 }
 
 function createMarker(place) {
-    var icon = {
+    icon = {
         url: markerIcon[iconLink][0],
         scaledSize: new google.maps.Size(markerIcon[iconLink][1], markerIcon[iconLink][1]), // scaled size
     };
@@ -152,6 +171,11 @@ function createMarker(place) {
             markerSetAsHabit = false;
             timerCanStart = true;
             currentHabitCoord = [place.geometry.location.lat(), place.geometry.location.lng()];
+            userDetail.habits[0].location.lat = currentHabitCoord[0];
+            userDetail.habits[0].location.long = currentHabitCoord[1];
+            userDetail.habits[0].name = place.name;
+            userDetail.habits[0].address = place.formatted_address;
+            updateUserInformation(userDetail)
 
             //^^ this is setting habt cordinates
             $('#habitName').text(place.name);
@@ -234,7 +258,7 @@ function timerQuarter() {
         stopTimer();
     } else if (time == 270) {
         navigator.geolocation.getCurrentPosition(geoSuccess);
-        if (!getDistanceFromLatLonInFt(myPosition[0], myPosition[1], currentHabitCoord[0], currentHabitCoord[1])) {
+        if (!getDistanceFromLatLonInFt(myPosition[0], myPosition[1], userDetail.habits[0].location.lat, userDetail.habits[0].location.long)) {
             stopTimer();
             alert("You are too far away from your habit location!");
             time = 0;

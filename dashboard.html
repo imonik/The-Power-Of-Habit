@@ -43,7 +43,15 @@
 	    left: 0;
 	    right: 0;
 	    bottom: 0;	
-}
+        }   
+
+        .row{
+            margin-bottom: -29px !important;
+        }
+
+        main{
+            margin: 20px 100px !important;
+        }
 
     </style>
 </head>
@@ -232,7 +240,7 @@
         });
 
         $('#completeHabit1').on('click', function () {
-            if (timerCanStart == true && getDistanceFromLatLonInFt(myPosition[0], myPosition[1], currentHabitCoord[0], currentHabitCoord[1])) {
+            if (timerCanStart == true && getDistanceFromLatLonInFt(myPosition[0], myPosition[1], userDetail.habits[0].location.lat, userDetail.habits[0].location.long)) {
                 timerVar = setInterval(timerQuarter, 1000);
             }
             timerCanStart = false;
