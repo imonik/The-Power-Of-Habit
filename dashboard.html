@@ -257,6 +257,11 @@
             $('#habitName').text('Pick a Habit!');
             $('#habitAddress').text('');
             setHabitButtonState = true
+            userDetail.habits[0].location.lat = 0;
+            userDetail.habits[0].location.long = 0;
+            userDetail.habits[0].name = '';
+            userDetail.habits[0].address = '';
+            updateUserInformation(userDetail)
         }
 
         $('#agreeModify').on('click', resetHabit);
