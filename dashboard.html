@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./assets/css/styles.css">
     <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script> <!-- Charts.js CDN-->
     <link href="./assets/css/materialize.css" type="text/css" rel="stylesheet">
     <link href="./assets/css/style.css" type="text/css" rel="stylesheet">
     <!-- Custom CSS-->
@@ -211,9 +211,8 @@
                 <div class="col s12 m4 l4">
                     <div class="card pt-0 pb-0" id="habit1Metrics">
                         <div class="padding-2 ml-2">
-                            <h5>$ 22,300</h5>
-                            <p class="mt-2 mb-0">Streak Graph</p>
-                            <p class="no-margin grey-text lighten-3">$40,512 avg</p>
+                            <!-- Chart.js Graph added here -->
+                            <canvas id="myChart"></canvas>
                         </div>
                         <div class="row">
                             <div class="sample-chart-wrapper" style="margin-bottom: -14px; margin-top: -75px;">
@@ -246,7 +245,7 @@
            </div>
         </footer> -->
     </main>
-
+<script src="./assets/js/chart.js"></script>
     <script src="./assets/js/map.js"></script>
     <script type="text/javascript">
         function resetHabit() {
