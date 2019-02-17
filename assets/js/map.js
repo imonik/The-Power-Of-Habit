@@ -46,7 +46,6 @@ function getCurrentUser() {
                     navigator.geolocation.getCurrentPosition(geoSuccess);
                     preloadMap = false;
                 }
-
             });
 
         } else {
@@ -83,7 +82,7 @@ var range = 3050; //ft
 
 //-------------Timer Vars----------------//
 var timerCanStart = false;
-var timeAtHabit = 5 * 1;
+var timeAtHabit = 5 * 2;
 var timerVar;
 var timePercentage;
 var minutes = 0;
@@ -136,6 +135,7 @@ function initMap() {
     myPosition = [posLat, posLong];
     $('.preloader-background').delay(600).fadeOut('slow');
     $('.preloader-wrapper').fadeOut();
+    
     if (userDetail.habits[0].address == "") {
         return;
     } else {
@@ -244,7 +244,6 @@ function timerQuarter() {
     time++
     if (time == timeAtHabit) {
         var month = parseInt(mm)-1;
-        alert('You Have Completed This Habit!');
         userDetail.habits[0].streak[month]++;
         updateUserInformation(userDetail);
         stopTimer();

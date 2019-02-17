@@ -156,16 +156,18 @@
         <div id="daily-data-chart">
             <div class="row">
                 <div class="col s12 m4 l4">
-                    <div class="card pt-0 pb-0 habitButton" id="habit1">
+                    <div class="card pt-0 pb-0 habitButton">
 
                         <div class="padding-2 ml-2 center-align">
-                            <h4 id="habitName">Pick a Habit!</h4>
-                            <div>
-                                <p class="mt-2 mb-0" id="habitAddress"></p>
+                            <div id="habit1">
+                                <h4 id="habitName">Pick a Habit!</h4>
+                                <div>
+                                    <p class="mt-2 mb-0" id="habitAddress"></p>
+                                </div>
+                                <!-- Modal Trigger -->
+                                <button data-target="modal2" class="btn modal-trigger mt-2" id="modifyHabit">Modify</button>
                             </div>
-                            <!-- Modal Trigger -->
-                            <button data-target="modal2" class="btn modal-trigger mt-2" id="modifyHabit">Modify</button>
-
+                            
                             <!-- Modal Structure -->
                             <div id="modal2" class="modal">
                                 <div class="modal-content grey-text">
@@ -181,8 +183,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col s12 m4 l4">
-                    <div class="card pt-0 pb-0 habitButton center-align" id="completeHabit1 ">
+                <div class="col s12 m4 l4 center-align">
+                    <div class="card pt-0 pb-0 habitButton center-align" id="completeHabit1">
                         <div class="padding-2 ml-2">
                             <h4>Complete Habit!</h4>
                             <div id="timerDisplay">0:00</div>
@@ -192,7 +194,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col s12 m4 l4">
+                <div class="col s12 m4 l4 center-align">
                     <div class="card pt-0 pb-0" id="habit1Metrics">
                         <div class="padding-2 ml-2">
                             <!-- Chart.js Graph added here -->
@@ -236,11 +238,14 @@
             $('#modifyHabit').hide('slow');
             $('#habitName').text('Pick a Habit!');
             $('#habitAddress').text('');
-            setHabitButtonState = true
+            setHabitButtonState = true;
+            markerSetAsHabit = false;
+            preloadMap = true
             userDetail.habits[0].location.lat = 0;
             userDetail.habits[0].location.long = 0;
             userDetail.habits[0].name = '';
             userDetail.habits[0].address = '';
+            userDetail.habits[0].streak = new Array(12).fill(0)
             updateUserInformation(userDetail)
         }
 
@@ -257,8 +262,10 @@
             if (timerCanStart == true && getDistanceFromLatLonInFt(myPosition[0], myPosition[1], userDetail.habits[
                 0].location.lat, userDetail.habits[0].location.long)) {
                 timerVar = setInterval(timerQuarter, 1000);
+                console.log('TimerStart');
             }
             timerCanStart = false;
+            console.log('TimerStart');
         });
     </script>
 
