@@ -45,9 +45,10 @@ var StartPoint = StartPoint || {};
             });
 
             $(".habits").on("click", function () {
-                totalCompleted =[0,0,0,0,0,0,0,0,0,0,0,0];
-                longestStreak = 0;
-                var habit = { id: 0,  name: "", totalCompleted, longestStreak, daysLeft: 0, frequency: [], location: { long: 0, lat: 0 }};
+                var totalCompleted =[0,0,0,0,0,0,0,0,0,0,0,0];
+                var longestStreak = 0;
+                var lastDayCompleted = [0,0,0];
+                var habit = { id: 0,  name: "", lastDayCompleted, totalCompleted, longestStreak, daysLeft: 0, frequency: [], location: { long: 0, lat: 0 }};
                 var preload = { state: false, position: 0,  name: ""};
 
                 var selectedHabit = $(this).data("name");

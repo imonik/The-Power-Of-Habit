@@ -3,6 +3,10 @@ var today = new Date();
 var dd = today.getDate();
 var mm = today.getMonth() + 1; //January is 0!
 var yyyy = today.getFullYear();
+var lastCompletedDay;
+var lastCompletedMonth;
+var lastCompletedYear;
+var completeHabitState;
 
 function getCurrentDate(){
     if (dd < 10) {
@@ -45,6 +49,20 @@ function getCurrentUser() {
                     };
                     navigator.geolocation.getCurrentPosition(geoSuccess);
                     preloadMap = false;
+                    lastCompletedDay = userDetail.habits[0].lastDayCompleted[1];
+                    lastCompletedMonth = userDetail.habits[0].lastDayCompleted[0];
+                    lastCompletedYear = userDetail.habits[0].lastDayCompleted[2];
+                    completeHabitState = userDetail.habits[0].state;
+
+                    if(parseInt(mm) == lastCompletedMonth && parseInt(dd) == lastCompletedDay && parseInt(yyyy) == lastCompletedYear && completeHabitState == false){
+                        console.log("TODAY ALREADY COMPLETED");
+                        timerCanStart = false;
+                    }else{
+                        userDetail.habits[0].state = true;
+                        timerCanStart = true;
+                        $('#completeHabit1').addClass('hover');
+                        updateUserInformation(userDetail);
+                    }
                 }
             });
 
@@ -137,6 +155,7 @@ function initMap() {
     $('.preloader-wrapper').fadeOut();
     
     if (userDetail.habits[0].address == "") {
+        $('.habitButton').eq(0).addClass('hover');
         $('#modifyHabit').hide();
         return;
     } else {
@@ -144,7 +163,6 @@ function initMap() {
             position: { lat: userDetail.habits[0].location.lat, lng: userDetail.habits[0].location.long },
             map: map
         });
-        timerCanStart = true;
         markerSetAsHabit = false;
         setHabitButtonState = false;
         $('#habitName').text(userDetail.habits[0].name);
@@ -206,6 +224,7 @@ function createMarker(place) {
             userDetail.habits[0].name = place.name;
             userDetail.habits[0].address = place.formatted_address;
             updateUserInformation(userDetail)
+            $('.habitButton').eq(0).removeClass('hover');
             $('#habitName').text(place.name);
             $('#habitAddress').text(place.formatted_address);
             $('#completeHabit1').show('slow');
@@ -244,10 +263,13 @@ function searchButton() {
 function timerQuarter() {
     time++
     if (time == timeAtHabit) {
+        stopTimer();
         var month = parseInt(mm)-1;
         userDetail.habits[0].totalCompleted[month]++;
+        userDetail.habits[0].lastDayCompleted = [parseInt(mm),parseInt(dd),parseInt(yyyy)];
+        $('#completeHabit1').removeClass('hover');
+        userDetail.habits[0].state = false;
         updateUserInformation(userDetail);
-        stopTimer();
     } else if (time == 270) {
         navigator.geolocation.getCurrentPosition(geoSuccess);
         if (!getDistanceFromLatLonInFt(myPosition[0], myPosition[1], userDetail.habits[0].location.lat, userDetail.habits[0].location.long)) {
