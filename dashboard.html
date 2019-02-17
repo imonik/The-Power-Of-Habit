@@ -57,11 +57,12 @@
 </head>
 
 <body class="" cz-shortcut-listen="true">
-    <nav>
+    <nav class="hoverable">
         <div class="nav-wrapper">
             <a href="#" class="brand-logo"> HABITUAL</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="dashboard.html">Home</a></li>
+                <li class="hoverable"><a href="dashboard.html">Home</a></li>
+                <li class="hoverable"><a href="analytics.html">My Rewards</a></li>
                 <li>
                     <!-- Modal Trigger -->
                     <a class="waves-effect waves-light btn modal-trigger" id="aLogin" href="#modal1">Login</a>
@@ -108,7 +109,7 @@
                 <div class="col s12 m12 l12">
                     <div id="revenue-chart" class="card">
                         <div class="card-content">
-                            <div class="container text-center allLocations">
+                            <div class="container center-align allLocations">
                                 <h4 class="header mt-0">Find Habits :
                                     <button class="btn location" data-state="false" data-position=1 data-name="gym fitness">Gym</button>
                                     <button class="btn location" data-state="false" data-position=2 data-name="public park">Parks</button>
@@ -156,13 +157,14 @@
             <div class="row">
                 <div class="col s12 m4 l4">
                     <div class="card pt-0 pb-0 habitButton" id="habit1">
-                        <div class="padding-2 ml-2 text-center">
+
+                        <div class="padding-2 ml-2 center-align">
                             <h4 id="habitName">Pick a Habit!</h4>
                             <div>
                                 <p class="mt-2 mb-0" id="habitAddress"></p>
                             </div>
                             <!-- Modal Trigger -->
-                            <button data-target="modal2" class="btn modal-trigger" id="modifyHabit">Modify</button>
+                            <button data-target="modal2" class="btn modal-trigger mt-2" id="modifyHabit">Modify</button>
 
                             <!-- Modal Structure -->
                             <div id="modal2" class="modal">
@@ -180,7 +182,7 @@
                     </div>
                 </div>
                 <div class="col s12 m4 l4">
-                    <div class="card pt-0 pb-0 habitButton" id="completeHabit1">
+                    <div class="card pt-0 pb-0 habitButton center-align" id="completeHabit1 ">
                         <div class="padding-2 ml-2">
                             <h4>Complete Habit!</h4>
                             <div id="timerDisplay">0:00</div>
