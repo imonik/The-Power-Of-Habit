@@ -1,40 +1,67 @@
-//-----------Firebase Code----------//
+//-----------Current Date----------//
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth() + 1; //January is 0!
+var yyyy = today.getFullYear();
+
+function getCurrentDate(){
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+    
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+    
+    today = mm + '/' + dd + '/' + yyyy;
+    console.log(today);
+}
+
+// -----------Firebase Code----------//
 var userDetail;
 var currentUserId;
+var preloadMap = true;
 
-
-function getCurrentUser(){
+function getCurrentUser() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
-             currentUser = firebase.auth().currentUser;
-             currentUserId =  currentUser.uid; 
-             firebase.database().ref('items/'+ currentUserId).on('value', function(snapshot){
+            currentUser = firebase.auth().currentUser;
+            currentUserId = currentUser.uid;
+            firebase.database().ref('items/' + currentUserId).on('value', function (snapshot) {
                 userDetail = snapshot.val();
-                console.log(userDetail);
                 //Expected Result
                 //{age: "32", gender: "Female", habits: [{daysLeft: 0, frecuency: ["Mo", "We", "Fr"], id: 1, location: {lat: 0, long: 0}, name: "Yoga"},{{daysLeft: 0, frecuency: ["Mo", "We", "Fr"], id: 1, location: {lat: 0, long: 0}, name: "Gym"}}], name: "Monica Desantiago 2"}
-                var geoSuccess = function (position) {
-                    startPos = position;
-                    posLat = position.coords.latitude;
-                    posLong = position.coords.longitude;
-                    initMap();
-                };
-                navigator.geolocation.getCurrentPosition(geoSuccess);
-            
+                console.log(userDetail);
+                addChartData();
+                if(preloadMap == true){
+                    var geoSuccess = function (position) {
+                        startPos = position;
+                        posLat = position.coords.latitude;
+                        posLong = position.coords.longitude;
+                        initMap();
+                        getCurrentDate();
+                        console.log('Mapreloaded');
+                        // preloadMarker();
+                    };
+                    navigator.geolocation.getCurrentPosition(geoSuccess);
+                    preloadMap = false;
+                }
+
             });
-    
+
         } else {
             console.log("returning to home user not logged in");
-            window.location.href="home.html"; 
+            window.location.href = "home.html";
         }
     });
 }
-function updateUserInformation(Userdata){
+
+function updateUserInformation(Userdata) {
     firebase.database().ref('items/').child(currentUserId).update(Userdata)
         .then((snap) => {
             //TODO: PLEASE RETURN TO A PROPER PAGE IT CAN BE THE SAME PAGE YOU ARE 
             // window.location.href="dashboard.html"; 
-        }).catch(function(error) {
+        }).catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -56,7 +83,7 @@ var range = 3050; //ft
 
 //-------------Timer Vars----------------//
 var timerCanStart = false;
-var timeAtHabit = 5 * 60;
+var timeAtHabit = 5 * 1;
 var timerVar;
 var timePercentage;
 var minutes = 0;
@@ -87,8 +114,6 @@ window.onload = function () {
     $('#completeHabit1').hide();
     $('#habit1Metrics').hide();
     getCurrentUser();
-
-    // for(var i = 0; i<userDetail.habits)
 };
 
 function initMap() {
@@ -111,12 +136,11 @@ function initMap() {
     myPosition = [posLat, posLong];
     $('.preloader-background').delay(600).fadeOut('slow');
     $('.preloader-wrapper').fadeOut();
-    console.log(userDetail.habits.length);
-    if(userDetail.habits[0].address == ""){
+    if (userDetail.habits[0].address == "") {
         return;
-    }else{
+    } else {
         marker = new google.maps.Marker({
-            position: { lat: userDetail.habits[0].location.lat, lng: userDetail.habits[0].location.long},
+            position: { lat: userDetail.habits[0].location.lat, lng: userDetail.habits[0].location.long },
             map: map
         });
         timerCanStart = true;
@@ -124,7 +148,6 @@ function initMap() {
         setHabitButtonState = false;
         $('#habitName').text(userDetail.habits[0].name);
         $('#habitAddress').text(userDetail.habits[0].address);
-        $('#completeHabit1').show('slow');
         $('#completeHabit1').show('slow');
         $('#habit1Metrics').show('slow');
         $('.progress').show('slow');
@@ -175,25 +198,20 @@ function createMarker(place) {
             markerSetAsHabit = false;
             setHabitButtonState = false;
             timerCanStart = true;
+            preloadMap = true;
             currentHabitCoord = [place.geometry.location.lat(), place.geometry.location.lng()];
             userDetail.habits[0].location.lat = currentHabitCoord[0];
             userDetail.habits[0].location.long = currentHabitCoord[1];
             userDetail.habits[0].name = place.name;
             userDetail.habits[0].address = place.formatted_address;
             updateUserInformation(userDetail)
-
-            //^^ this is setting habt cordinates
             $('#habitName').text(place.name);
             $('#habitAddress').text(place.formatted_address);
-            $('#completeHabit1').show('slow');
             $('#completeHabit1').show('slow');
             $('#habit1Metrics').show('slow');
             $('.progress').show('slow');
             $('#timerDisplay').show('slow');
             $('#modifyHabit').show('slow');
-            //I have more than one habit under my username
-            //userDetail.habits[0].location.lat = 123456
-            //userDetail.habits[0].location.long = 123456
         }
     });
     placeArray[queryPosition].push(marker);
@@ -209,27 +227,57 @@ function searchButton() {
     iconLink = $(this).attr('data-position');
     queryPosition = $(this).attr('data-position');
     searchState = $(this).attr('data-state');
+    queryText = $(this).attr('data-name');
+    // console.log(iconLink);
+    // console.log(queryPosition);
+    // console.log(searchState);
+    // console.log(queryText);
+    searchPlaces();
     if ($(this).attr('data-state') == "false") {
-        queryText = $(this).attr('data-name');
-        searchPlaces();
         $(this).attr('data-state', 'true');
     } else if ($(this).attr('data-state') == "true") {
-        queryText = $(this).attr('data-name');
-        searchPlaces();
         $(this).attr('data-state', 'false');
     }
 };
 
-function addButt() {
-    var $butt = $('<button></button>');
-    $butt.append($('input').val());
-    $butt.addClass('btn btn-success location');
-    $butt.attr('data-state', 'false');
-    $butt.attr('data-name', $('input').val());
-    $butt.attr('data-position', queryPositionCounter);
-    $butt.on('click', searchButton);
-    $('.allLocations').append($butt);
-    queryPositionCounter++;
+function timerQuarter() {
+    time++
+    if (time == timeAtHabit) {
+        var month = parseInt(mm)-1;
+        alert('You Have Completed This Habit!');
+        userDetail.habits[0].streak[month]++;
+        updateUserInformation(userDetail);
+        stopTimer();
+    } else if (time == 270) {
+        navigator.geolocation.getCurrentPosition(geoSuccess);
+        if (!getDistanceFromLatLonInFt(myPosition[0], myPosition[1], userDetail.habits[0].location.lat, userDetail.habits[0].location.long)) {
+            stopTimer();
+            alert("You are too far away from your habit location!");
+            time = 0;
+            seconds = 0;
+            tens = 0;
+            minutes = 0;
+        }
+    }
+
+    if (seconds < 9) {
+        seconds++;
+    } else if (tens < 5) {
+        seconds = 0;
+        tens++
+    } else if (tens = 6) {
+        seconds = 0;
+        tens = 0;
+        minutes++
+    }
+
+    $('#timerDisplay').text(minutes + ':' + tens + '' + seconds);
+    timePercentage = (time / timeAtHabit) * 100;
+    $('#habit1Timer').css('width', timePercentage + '%');
+}
+
+function stopTimer() {
+    clearInterval(timerVar);
 }
 
 function deg2rad(deg) {
@@ -257,40 +305,27 @@ function getDistanceFromLatLonInFt(lat1, lon1, lat2, lon2) {
     }
 }
 
-function timerQuarter() {
-    time++
-    if (time == timeAtHabit) {
-        alert('You Have Completed This Habit!');
-        stopTimer();
-    } else if (time == 270) {
-        navigator.geolocation.getCurrentPosition(geoSuccess);
-        if (!getDistanceFromLatLonInFt(myPosition[0], myPosition[1], userDetail.habits[0].location.lat, userDetail.habits[0].location.long)) {
-            stopTimer();
-            alert("You are too far away from your habit location!");
-            time = 0;
-            seconds = 0;
-            tens = 0;
-            minutes = 0;
-        }
+//-----------------Extra Features (Not In Use)-----------------//
+function preloadMarker() {
+    console.log(userDetail.preload);
+    for(let i = 0; i<userDetail.preload.length; i++){
+        iconLink = userDetail.preload[i].position + "";
+        queryPosition = userDetail.preload[i].position + "";
+        searchState = userDetail.preload[i].state + "";
+        queryText = userDetail.preload[i].name;
+        console.log(queryText)
+        searchPlaces();
     }
-
-    if (seconds < 9) {
-        seconds++;
-    } else if (tens < 5) {
-        seconds = 0;
-        tens++
-    } else if(tens = 6){
-        seconds = 0;
-        tens = 0;
-        minutes++
-    }
-
-    $('#timerDisplay').text(minutes + ':' + tens + '' + seconds);
-    timePercentage = (time / timeAtHabit) * 100;
-    $('#habit1Timer').css('width', timePercentage + '%');
 }
 
-function stopTimer() {
-    clearInterval(timerVar);
+function addButt() {
+    var $butt = $('<button></button>');
+    $butt.append($('input').val());
+    $butt.addClass('btn btn-success location');
+    $butt.attr('data-state', 'false');
+    $butt.attr('data-name', $('input').val());
+    $butt.attr('data-position', queryPositionCounter);
+    $butt.on('click', searchButton);
+    $('.allLocations').append($butt);
+    queryPositionCounter++;
 }
-

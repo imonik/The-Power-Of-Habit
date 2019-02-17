@@ -156,7 +156,7 @@
             <div class="row">
                 <div class="col s12 m4 l4">
                     <div class="card pt-0 pb-0 habitButton" id="habit1">
-                        <div class="padding-2 ml-2">
+                        <div class="padding-2 ml-2 text-center">
                             <h4 id="habitName">Pick a Habit!</h4>
                             <div>
                                 <p class="mt-2 mb-0" id="habitAddress"></p>
@@ -167,7 +167,7 @@
                             <!-- Modal Structure -->
                             <div id="modal2" class="modal">
                                 <div class="modal-content grey-text">
-                                    
+
                                     <p>Are you sure you want to quit?</p>
                                 </div>
                                 <div class="modal-footer">
@@ -192,14 +192,15 @@
                 </div>
                 <div class="col s12 m4 l4">
                     <div class="card pt-0 pb-0" id="habit1Metrics">
-                        <div>
+                        <div class="padding-2 ml-2">
                             <!-- Chart.js Graph added here -->
+                            <h4>Streak Tracker</h4>
                             <canvas id="myChart"></canvas>
-                        </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 
         </div>
@@ -222,8 +223,8 @@
            </div>
         </footer> -->
     </main>
-<script src="./assets/js/chart.js"></script>
     <script src="./assets/js/map.js"></script>
+    <script src="./assets/js/chart.js"></script>
     <script type="text/javascript">
         function resetHabit() {
             $('.progress').slideUp('slow');
@@ -245,34 +246,28 @@
 
         $('.location').on('click', searchButton);
         $('#habit1').on('click', function () {
-            if(setHabitButtonState == true){
+            if (setHabitButtonState == true) {
                 markerSetAsHabit = true;
             }
         });
 
         $('#completeHabit1').on('click', function () {
             if (timerCanStart == true && getDistanceFromLatLonInFt(myPosition[0], myPosition[1], userDetail.habits[
-                    0].location.lat, userDetail.habits[0].location.long)) {
+                0].location.lat, userDetail.habits[0].location.long)) {
                 timerVar = setInterval(timerQuarter, 1000);
             }
             timerCanStart = false;
         });
-        // <!-- 
-        //         var elem = document.querySelector('.collapsible.expandable');
-        //         var instance = M.Collapsible.init(elem, {
-        //             accordion: false
-        //         }); -->
     </script>
 
     <script>
-        // Or with jQuery
         $(document).ready(function () {
             $('.modal').modal();
         });
 
         var scriptTag = $('<script>').attr('src',
             `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`).attr('async', '').attr(
-            'defer', '');
+                'defer', '');
         $('body').append(scriptTag);
     </script>
 

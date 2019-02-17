@@ -45,7 +45,8 @@ var StartPoint = StartPoint || {};
             });
 
             $(".habits").on("click", function () {
-                var habit = { id: 0,  name: "", streak: 0, daysLeft: 0, frequency: [], location: { long: 0, lat: 0 } };
+                streak =[0,0,0,0,0,0,0,0,0,0,0,0];
+                var habit = { id: 0,  name: "", streak, daysLeft: 0, frequency: [], location: { long: 0, lat: 0 }};
                 var preload = { state: false, position: 0,  name: ""};
 
                 var selectedHabit = $(this).data("name");

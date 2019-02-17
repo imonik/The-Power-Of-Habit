@@ -1,24 +1,19 @@
 let myChart = document.getElementById('myChart').getContext('2d');
 
 // Global Options
-Chart.defaults.global.defaultFontFamily = 'Lato';
-Chart.defaults.global.defaultFontSize = 18;
-Chart.defaults.global.defaultFontColor = '#777';
+Chart.defaults.global.defaultFontFamily = "Roboto, sans-serif";
+Chart.defaults.global.defaultFontSize = 15;
+Chart.defaults.global.defaultFontColor = 'rgba(0, 0, 0, 0.87)';
+
+var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
 
 let massPopChart = new Chart(myChart, {
     type: 'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
     data: {
-        labels: ['Month1', 'Month2', 'Month3', 'Month4', 'Month5', 'Month6'],
+        labels: [],
         datasets: [{
             label: 'Streak / mo.',
-            data: [
-                18,
-                30,
-                36,
-                45,
-                45,
-                56
-            ],
+            data: [],
             //backgroundColor:'green',
             backgroundColor: [
                 'rgba(255, 99, 132, 0.6)',
@@ -37,12 +32,12 @@ let massPopChart = new Chart(myChart, {
     },
     options: {
         title: {
-            display: true,
-            text: 'Habitual Fitness',
-            fontSize: 25
+            display: false,
+            text: 'Habit Tracker',
+            fontSize: 10
         },
         legend: {
-            display: true,
+            display: false,
             position: 'right',
             labels: {
                 fontColor: '#000'
@@ -50,10 +45,10 @@ let massPopChart = new Chart(myChart, {
         },
         layout: {
             padding: {
-                left: 0,
-                right: 0,
-                bottom: 0,
-                top: 0
+                left: 10,
+                right: 10,
+                bottom: 10,
+                top: 10
             }
         },
         tooltips: {
@@ -61,3 +56,26 @@ let massPopChart = new Chart(myChart, {
         }
     }
 });
+
+function updateChartData(){
+
+}
+
+function addChartData() {
+    var monthsNames = [];
+    var monthsStreak = []
+    if(mm<7){
+        for(let i = 0; i<6; i++){
+            monthsNames.push(months[i]);
+            monthsStreak.push(userDetail.habits[0].streak[i]);
+        }
+    } else{
+        for(let i = 6; i<12; i++){
+            monthsNames.push(months[i]);
+            monthsStreak.push(userDetail.habits[0].streak[i]);
+        }
+    }
+    massPopChart.data.labels = monthsNames
+    massPopChart.data.datasets[0].data = monthsStreak;
+    massPopChart.update();
+}
