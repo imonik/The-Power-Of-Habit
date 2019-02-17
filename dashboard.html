@@ -179,7 +179,6 @@
                                     <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="agreeModify">Agree</a>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -198,7 +197,7 @@
                     <div class="card pt-0 pb-0" id="habit1Metrics">
                         <div class="padding-2 ml-2">
                             <!-- Chart.js Graph added here -->
-                            <h4>Streak Tracker</h4>
+                            <h4>Total Completed</h4>
                             <canvas id="myChart"></canvas>
                         </div>
                     </div>
@@ -245,7 +244,7 @@
             userDetail.habits[0].location.long = 0;
             userDetail.habits[0].name = '';
             userDetail.habits[0].address = '';
-            userDetail.habits[0].streak = new Array(12).fill(0)
+            userDetail.habits[0].totalCompleted = new Array(12).fill(0)
             updateUserInformation(userDetail)
         }
 

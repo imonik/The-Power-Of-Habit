@@ -137,6 +137,7 @@ function initMap() {
     $('.preloader-wrapper').fadeOut();
     
     if (userDetail.habits[0].address == "") {
+        $('#modifyHabit').hide();
         return;
     } else {
         marker = new google.maps.Marker({
@@ -244,7 +245,7 @@ function timerQuarter() {
     time++
     if (time == timeAtHabit) {
         var month = parseInt(mm)-1;
-        userDetail.habits[0].streak[month]++;
+        userDetail.habits[0].totalCompleted[month]++;
         updateUserInformation(userDetail);
         stopTimer();
     } else if (time == 270) {

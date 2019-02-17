@@ -63,19 +63,19 @@ function updateChartData(){
 
 function addChartData() {
     var monthsNames = [];
-    var monthsStreak = []
+    var monthstotalCompleted = []
     if(mm<7){
         for(let i = 0; i<6; i++){
             monthsNames.push(months[i]);
-            monthsStreak.push(userDetail.habits[0].streak[i]);
+            monthstotalCompleted.push(userDetail.habits[0].totalCompleted[i]);
         }
     } else{
         for(let i = 6; i<12; i++){
             monthsNames.push(months[i]);
-            monthsStreak.push(userDetail.habits[0].streak[i]);
+            monthstotalCompleted.push(userDetail.habits[0].totalCompleted[i]);
         }
     }
     massPopChart.data.labels = monthsNames
-    massPopChart.data.datasets[0].data = monthsStreak;
+    massPopChart.data.datasets[0].data = monthstotalCompleted;
     massPopChart.update();
 }
