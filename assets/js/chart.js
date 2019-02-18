@@ -57,10 +57,6 @@ let massPopChart = new Chart(myChart, {
     }
 });
 
-function updateChartData(){
-
-}
-
 function addChartData() {
     var monthsNames = [];
     var monthstotalCompleted = []
