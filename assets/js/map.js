@@ -88,7 +88,7 @@ function updateUserInformation(Userdata) {
             // ...
         });
 }
-//----------------------------------//
+//--------------Data for Map--------------//
 
 var map, service, infowindow, marker, center, startPos, posLat, posLong, searchState, queryText, myPosition, iconLink, icon;
 var setHabitButtonState = true;
@@ -167,10 +167,16 @@ function initMap() {
         setHabitButtonState = false;
         $('#habitName').text(userDetail.habits[0].name);
         $('#habitAddress').text(userDetail.habits[0].address);
-        $('#completeHabit1').show('slow');
+
+        if(userDetail.habits[0].state==true){
+            $('.progress').show('slow');
+            $('#timerDisplay').show('slow');       
+        }else{
+            $('#completeHabit1 h4').text('Habit Completed!');
+            $('#completeHabit1').show('slow');
+        }
         $('#habit1Metrics').show('slow');
-        $('.progress').show('slow');
-        $('#timerDisplay').show('slow');
+        $('#completeHabit1').show('slow');
     }
 }
 
@@ -227,6 +233,7 @@ function createMarker(place) {
             $('.habitButton').eq(0).removeClass('hover');
             $('#habitName').text(place.name);
             $('#habitAddress').text(place.formatted_address);
+            $('#completeHabit1 h4').text('Complete Habit!');
             $('#completeHabit1').show('slow');
             $('#habit1Metrics').show('slow');
             $('.progress').show('slow');
@@ -268,6 +275,9 @@ function timerQuarter() {
         userDetail.habits[0].totalCompleted[month]++;
         userDetail.habits[0].lastDayCompleted = [parseInt(mm),parseInt(dd),parseInt(yyyy)];
         $('#completeHabit1').removeClass('hover');
+        $('#completeHabit1 h4').text('Habit Completed!');
+        $('.progress').hide();
+        $('#timerDisplay').hide();
         userDetail.habits[0].state = false;
         updateUserInformation(userDetail);
     } else if (time == 270) {
