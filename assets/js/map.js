@@ -97,18 +97,6 @@ var queryPositionCounter = 7;
 var markerSetAsHabit = false;
 var onloadMarker = true;
 var range = 5000; //ft
-
-//-------------Timer Vars----------------//
-var timerCanStart = false;
-var timeAtHabit = 5 * 2;
-var timerVar;
-var timePercentage;
-var minutes = 0;
-var seconds = 0;
-var tens = 0;
-var time = 0;
-
-//---------Data for Firebase---------//
 var currentHabitCoord = [];
 var queryCoord = [];
 var placeArray = [];
@@ -124,6 +112,17 @@ var markerIcon = {
     "9": ["./assets/imgs/mapImg/custom.png", 35]
 };
 var habitCoord = {};
+
+//-------------Timer Vars----------------//
+var timerCanStart = false;
+var timeAtHabit = 5 * 2;
+var timerVar;
+var timePercentage;
+var minutes = 0;
+var seconds = 0;
+var tens = 0;
+var time = 0;
+
 
 window.onload = function () {
     $('.progress').hide();
