@@ -96,7 +96,7 @@ var queryPosition = 0;
 var queryPositionCounter = 7;
 var markerSetAsHabit = false;
 var onloadMarker = true;
-var range = 1000; //ft
+var range = 5000; //ft
 
 //-------------Timer Vars----------------//
 var timerCanStart = false;
@@ -164,7 +164,7 @@ function initMap() {
             map: map,
             icon: {
                 url: markerIcon["7"][0],
-                scaledSize: new google.maps.Size(markerIcon[iconLink][1], markerIcon[iconLink][1]), // scaled size
+                scaledSize: new google.maps.Size(markerIcon["7"][1], markerIcon["7"][1]), // scaled size
             },
         });
         markerSetAsHabit = false;
