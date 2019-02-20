@@ -96,7 +96,7 @@ var queryPosition = 0;
 var queryPositionCounter = 7;
 var markerSetAsHabit = false;
 var onloadMarker = true;
-var range = 3050; //ft
+var range = 1000; //ft
 
 //-------------Timer Vars----------------//
 var timerCanStart = false;
@@ -161,7 +161,11 @@ function initMap() {
     } else {
         marker = new google.maps.Marker({
             position: { lat: userDetail.habits[0].location.lat, lng: userDetail.habits[0].location.long },
-            map: map
+            map: map,
+            icon: {
+                url: markerIcon["7"][0],
+                scaledSize: new google.maps.Size(markerIcon[iconLink][1], markerIcon[iconLink][1]), // scaled size
+            },
         });
         markerSetAsHabit = false;
         setHabitButtonState = false;
@@ -275,7 +279,7 @@ function timerQuarter() {
         userDetail.habits[0].totalCompleted[month]++;
         userDetail.habits[0].lastDayCompleted = [parseInt(mm),parseInt(dd),parseInt(yyyy)];
         $('#completeHabit1').removeClass('hover');
-        $('#completeHabit1 h4').text('Habit Completed!');
+        $('#completeHabit1 h4').text(`Today's Habit is Completed!`);
         $('.progress').hide();
         $('#timerDisplay').hide();
         userDetail.habits[0].state = false;
@@ -329,7 +333,7 @@ function getDistanceFromLatLonInFt(lat1, lon1, lat2, lon2) {
     var d = R * c; // Distance in ft
     console.log(d);
     if (d > range) {
-        alert("You are not close enough!");
+        alert(`You are not close enough! Out of range by: ${Math.floor(d-range)} ft`);
         return false;
     } else {
         $(this).css('background-color', 'red');
