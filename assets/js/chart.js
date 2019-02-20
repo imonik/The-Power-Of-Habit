@@ -53,6 +53,14 @@ let massPopChart = new Chart(myChart, {
         },
         tooltips: {
             enabled: true
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    min: 0,
+                    stepSize: 1
+                }
+            }]
         }
     }
 });
