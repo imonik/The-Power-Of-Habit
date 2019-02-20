@@ -154,7 +154,7 @@ function initMap() {
     $('.preloader-background').delay(600).fadeOut('slow');
     $('.preloader-wrapper').fadeOut();
     
-    if (userDetail.habits[0].address == "") {
+    if (userDetail.habits[0].name == "" || !userDetail.habits[0].address) {
         $('.habitButton').eq(0).addClass('hover');
         $('#modifyHabit').hide();
         return;
